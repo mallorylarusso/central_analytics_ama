@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AMA Parameters Tracker</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;color:#1a1a18;background:#fff;padding:24px;max-width:1600px;margin:0 auto;}
+h1{font-size:15px;font-weight:500;margin-bottom:3px;}
+.subtitle{font-size:11px;color:#73726c;margin-bottom:8px;}
+.note-banner{background:#e1f5ee;color:#0f6e56;font-size:11px;padding:8px 12px;border-radius:4px;margin-bottom:16px;font-weight:500;}
+.search-bar{margin-bottom:12px;}
+.search-bar input{font-family:inherit;font-size:12px;padding:6px 10px;border:1px solid #d3d1c7;border-radius:4px;width:320px;outline:none;}
+.search-bar input:focus{border-color:#85b7eb;}
+table{width:100%;border-collapse:collapse;font-size:11px;}
+thead th{background:#f4f3ef;color:#5f5e5a;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.04em;padding:6px 8px;text-align:left;border-bottom:1px solid #e8e6de;cursor:pointer;user-select:none;white-space:nowrap;}
+thead th:hover{background:#e8e6de;}
+thead th .sort-arrow{font-size:8px;margin-left:3px;color:#b4b2a9;}
+thead th.sorted-asc .sort-arrow::after{content:'\25B2';}
+thead th.sorted-desc .sort-arrow::after{content:'\25BC';}
+tbody td{padding:5px 8px;border-bottom:1px solid #f4f3ef;vertical-align:top;}
+tbody tr:hover{background:#f9f8f5;}
+.pill{display:inline-block;border-radius:3px;font-size:9px;padding:1px 5px;font-weight:500;white-space:nowrap;}
+.pill-yes{background:#e1f5ee;color:#0f6e56;}
+.pill-no{background:#f4f3ef;color:#888780;}
+.pill-exp{background:#dde8f5;color:#1a4a7a;margin:1px 0;}
+.override-list{list-style:none;padding:0;margin:0;}
+.override-list li{margin-bottom:2px;}
+.override-val{font-family:monospace;font-size:10px;color:#633806;background:#faeeda;padding:0 3px;border-radius:2px;}
+.default-val{font-family:monospace;font-size:10px;color:#1a1a18;background:#f4f3ef;padding:0 3px;border-radius:2px;}
+a.darwin-link{color:#185fa5;text-decoration:none;font-size:10px;}
+a.darwin-link:hover{text-decoration:underline;}
+.no-data{color:#b4b2a9;font-style:italic;}
+.download-btn{margin-top:16px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:#185fa5;background:#e6f1fb;border:.5px solid #85b7eb;border-radius:6px;padding:7px 14px;cursor:pointer;text-decoration:none;}
+.download-btn:hover{background:#b5d4f4;}
+</style>
+</head>
+<body>
+<h1>AMA Parameters Tracker</h1>
+<p class="subtitle">Darwin parameters used in AMA experiments (Domains 123 &amp; 124)</p>
+<div class="note-banner">All AMA experiments should use AMA domains: Domain 123 (Long-Term Analysis) or Domain 124 (Experimentation)</div>
+
+<div class="search-bar">
+  <input type="text" id="search" placeholder="Search parameters..." oninput="filterTable()">
+</div>
+
+<table id="params-table">
+  <thead>
+    <tr>
+      <th onclick="sortTable(0)">Parameter ID <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(1)">Parameter Name <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(2)">Default Value <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(3)">Default Tested <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(4)">Content Screen <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(5)">Entry Point <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(6)">Platform <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(7)">Experiments with Non-Default Values <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(8)">Is Entry Point <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(9)">Is Chat Optimization <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(10)">Description <span class="sort-arrow"></span></th>
+    </tr>
+  </thead>
+  <tbody id="params-body">
+  </tbody>
+</table>
+
+<a class="download-btn" href="#" onclick="downloadHTML();return false;">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="#185fa5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  Download as HTML
+</a>
+
+<script>
+/*__PARAMS_DATA_INJECT__*/
+
+var tbody=document.getElementById('params-body');
+
+function yesNoPill(val){
+  if(val===true)return'<span class="pill pill-yes">yes</span>';
+  if(val===false)return'<span class="pill pill-no">no</span>';
+  return'<span class="no-data">\u2014</span>';
+}
+
+function renderTable(){
+  tbody.innerHTML='';
+  for(var i=0;i<PARAMS.length;i++){
+    var p=PARAMS[i];
+    var tr=document.createElement('tr');
+    tr.setAttribute('data-search',(p.parameter_name||'').toLowerCase()+' '+(p.description||'').toLowerCase()+' '+(p.content_screen||'').toLowerCase()+' '+(p.entry_point||'').toLowerCase());
+
+    // Parameter ID
+    var td0=document.createElement('td');
+    if(p.parameter_id){
+      td0.innerHTML='<a class="darwin-link" href="https://evolve.admin.creditkarma.com/darwin/parameters/'+p.parameter_id+'" target="_blank">'+p.parameter_id+'</a>';
+    } else {
+      td0.innerHTML='<span class="no-data">\u2014</span>';
+    }
+    tr.appendChild(td0);
+
+    // Parameter Name
+    var td1=document.createElement('td');td1.textContent=p.parameter_name||'\u2014';tr.appendChild(td1);
+
+    // Default Value
+    var td2=document.createElement('td');
+    td2.innerHTML=p.default_value!=null?'<span class="default-val">'+escHtml(String(p.default_value))+'</span>':'<span class="no-data">\u2014</span>';
+    tr.appendChild(td2);
+
+    // Default Tested
+    var td3=document.createElement('td');td3.innerHTML=yesNoPill(p.default_tested);tr.appendChild(td3);
+
+    // Content Screen
+    var td4=document.createElement('td');td4.textContent=p.content_screen||'\u2014';tr.appendChild(td4);
+
+    // Entry Point
+    var td5=document.createElement('td');td5.textContent=p.entry_point||'\u2014';tr.appendChild(td5);
+
+    // Platform
+    var td6=document.createElement('td');td6.textContent=p.platform||'\u2014';tr.appendChild(td6);
+
+    // Experiments with non-default values
+    var td7=document.createElement('td');
+    if(p.overrides&&p.overrides.length){
+      var ul=document.createElement('ul');ul.className='override-list';
+      for(var j=0;j<p.overrides.length;j++){
+        var ov=p.overrides[j];
+        var li=document.createElement('li');
+        li.innerHTML='<span class="pill pill-exp">'+escHtml(ov.experimentName)+'</span> '+escHtml(ov.variation_name)+': <span class="override-val">'+escHtml(String(ov.override_value))+'</span>';
+        ul.appendChild(li);
+      }
+      td7.appendChild(ul);
+    } else {
+      td7.innerHTML='<span class="no-data">\u2014</span>';
+    }
+    tr.appendChild(td7);
+
+    // Is Entry Point
+    var td8=document.createElement('td');td8.innerHTML=yesNoPill(p.is_entry_point);tr.appendChild(td8);
+
+    // Is Chat Optimization
+    var td9=document.createElement('td');td9.innerHTML=yesNoPill(p.is_chat_optimization);tr.appendChild(td9);
+
+    // Description
+    var td10=document.createElement('td');td10.textContent=p.description||'\u2014';tr.appendChild(td10);
+
+    tbody.appendChild(tr);
+  }
+}
+
+function escHtml(s){
+  var d=document.createElement('div');d.appendChild(document.createTextNode(s));return d.innerHTML;
+}
+
+function filterTable(){
+  var q=document.getElementById('search').value.toLowerCase();
+  var rows=tbody.getElementsByTagName('tr');
+  for(var i=0;i<rows.length;i++){
+    var s=rows[i].getAttribute('data-search')||'';
+    rows[i].style.display=s.indexOf(q)>=0?'':'none';
+  }
+}
+
+var sortCol=-1,sortAsc=true;
+function sortTable(col){
+  var ths=document.querySelectorAll('thead th');
+  for(var i=0;i<ths.length;i++){ths[i].classList.remove('sorted-asc','sorted-desc');}
+  if(sortCol===col){sortAsc=!sortAsc;}else{sortCol=col;sortAsc=true;}
+  ths[col].classList.add(sortAsc?'sorted-asc':'sorted-desc');
+  PARAMS.sort(function(a,b){
+    var keys=['parameter_id','parameter_name','default_value','default_tested','content_screen','entry_point','platform','overrides','is_entry_point','is_chat_optimization','description'];
+    var va=a[keys[col]],vb=b[keys[col]];
+    if(va==null)va='';if(vb==null)vb='';
+    if(col===7){va=(a.overrides||[]).length;vb=(b.overrides||[]).length;}
+    if(typeof va==='string')va=va.toLowerCase();
+    if(typeof vb==='string')vb=vb.toLowerCase();
+    if(va<vb)return sortAsc?-1:1;
+    if(va>vb)return sortAsc?1:-1;
+    return 0;
+  });
+  renderTable();
+}
+
+renderTable();
+
+function downloadHTML(){
+  var blob=new Blob(['<!DOCTYPE html>\n'+document.documentElement.outerHTML],{type:'text/html'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ama_parameters.html';a.click();URL.revokeObjectURL(a.href);
+}
+</script>
+</body>
+</html>
