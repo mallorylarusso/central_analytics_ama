@@ -143,9 +143,9 @@ var AB_SHADES={
   88004:['#6dcaaa','#4db896']
 };
 var FIXED_OFFSETS={
-  '40569':{'Champion: Credit Tab':{fixedPct:6.3,ao:true},'Cash Flow + Txns':{fixedPct:25,topOffset:6.3},'pl_entrypoint':{fixedPct:12.5,topOffset:31.3},'Control':{fixedPct:5,topOffset:0}},
-  '40569d1':{'Champion: Dashboard':{fixedPct:6.3,ao:true},'Control':{fixedPct:5,topOffset:0}},
-  '40569d2':{'Champion: Cash Flow Tab':{fixedPct:6.3,ao:true},'Control':{fixedPct:5,topOffset:0}}
+  '40569':{'Champion: Credit Tab':{fixedPct:6.3,ao:true},'Cash Flow + Txns':{fixedPct:25,topOffset:6.3},'pl_entrypoint':{fixedPct:12.5,topOffset:31.3},'Control':{fixedPct:6.25,topOffset:0}},
+  '40569d1':{'Champion: Dashboard':{fixedPct:6.3,ao:true},'Control':{fixedPct:6.25,topOffset:0}},
+  '40569d2':{'Champion: Cash Flow Tab':{fixedPct:6.3,ao:true},'Control':{fixedPct:6.25,topOffset:0}}
 };
 
 function parseDate(s){var p=s.split('-');return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));}
@@ -172,7 +172,7 @@ var d123={id:123,label:'123 - Long-Term Analysis',layers:[
     {id:72082,name:'AMA Holdout',type:'Long-Term Holdout',start:'2026-03-11',end:null,ao:false,
      goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
      tools:[],toolSubNote:null,notes:[],
-     groups:[{name:'Control',pct:5}]},
+     groups:[{name:'Control',pct:6.25}]},
     {id:72085,name:'Cash Flow Static Banner',type:'Data Collection',start:'2026-03-11',end:'2026-04-20',ao:false,
      goal:'Collect prompts for DS / Evals',kpi:'Chat log data',
      tools:['txns_tool loaded'],toolSubNote:null,notes:[],
@@ -191,7 +191,7 @@ var d123={id:123,label:'123 - Long-Term Analysis',layers:[
     {id:72082,name:'AMA Holdout',type:'Long-Term Holdout',start:'2026-03-11',end:null,ao:false,allocOnly:true,
      goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
      tools:[],toolSubNote:null,notes:[],
-     groups:[{name:'Control',pct:6.3}]}
+     groups:[{name:'Control',pct:6.25}]}
   ]},
   {id:'40569d2',label:'Layer 40569 dup #2',tests:[
     {id:720780,name:'AMA Always On: Cash Flow Tab',type:'Always On',start:'2026-04-20',end:null,ao:true,noRamp:false,
@@ -202,7 +202,7 @@ var d123={id:123,label:'123 - Long-Term Analysis',layers:[
     {id:72082,name:'AMA Holdout',type:'Long-Term Holdout',start:'2026-03-11',end:null,ao:false,allocOnly:true,
      goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
      tools:[],toolSubNote:null,notes:[],
-     groups:[{name:'Control',pct:6.3}]}
+     groups:[{name:'Control',pct:6.25}]}
   ]}
 ]};
 
