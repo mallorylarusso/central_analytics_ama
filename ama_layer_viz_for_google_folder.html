@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AMA Testing Agenda</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;color:#1a1a18;background:#fff;padding:24px;max-width:1400px;margin:0 auto;}
+h1{font-size:15px;font-weight:500;margin-bottom:3px;}
+.subtitle{font-size:11px;color:#73726c;margin-bottom:16px;}
+.section-title{font-size:10px;font-weight:500;color:#888780;letter-spacing:.05em;text-transform:uppercase;margin:22px 0 10px;padding-bottom:5px;border-bottom:.5px solid #e8e6de;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.col-label{font-size:10px;font-weight:500;color:#73726c;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px;}
+.pill{display:inline-block;border-radius:3px;font-size:9px;padding:1px 5px;font-weight:500;white-space:nowrap;}
+.pill-ao{background:#c0dd97;color:#27500a;}
+.pill-lth{background:#d3d1c7;color:#2c2c2a;}
+.pill-dc{background:#faeeda;color:#633806;}
+.pill-ab{background:#dde8f5;color:#1a4a7a;}
+.pill-tool{background:#f0e6fb;color:#5a2d82;}
+.pill-note{background:#e1f5ee;color:#0f6e56;}
+a.lnk{color:#185fa5;font-size:9px;text-decoration:none;}
+a.lnk:hover{text-decoration:underline;}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;align-items:center;}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:10px;color:#5f5e5a;}
+.leg-sw{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+.ticks{position:relative;height:18px;margin-bottom:4px;}
+.tick{position:absolute;font-size:9px;color:#b4b2a9;transform:translateX(-50%);white-space:nowrap;top:1px;}
+.tick-line{position:absolute;bottom:0;width:.5px;height:3px;background:#d3d1c7;transform:translateX(-50%);}
+.today-mark{position:absolute;top:0;width:1.5px;height:100%;background:#e24b4a;opacity:.8;}
+.tl-layer-lbl{font-size:9px;color:#888780;font-style:italic;margin:7px 0 3px;padding-left:190px;}
+.tl-row{display:flex;align-items:center;height:22px;margin-bottom:1px;}
+.tl-name{width:186px;flex-shrink:0;font-size:9px;color:#1a1a18;text-align:right;padding-right:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tl-track{flex:1;position:relative;height:12px;background:#f4f3ef;border-radius:2px;overflow:visible;}
+.tl-bar{position:absolute;top:0;height:100%;border-radius:2px;}
+.tl-bar.open{border-radius:2px 0 0 2px;}
+.tl-bar.open::after{content:'>';position:absolute;right:-9px;top:50%;transform:translateY(-50%);font-size:6px;color:#888780;}
+.tl-today{position:absolute;top:-3px;width:1.5px;height:calc(100% + 6px);background:#e24b4a;opacity:.85;z-index:4;pointer-events:none;}
+.tl-meta{display:flex;gap:5px;flex-wrap:wrap;align-items:center;padding-left:190px;margin:2px 0 1px;}
+.tl-row2{padding-left:190px;margin-bottom:2px;}
+.tl-row3{padding-left:190px;margin-bottom:2px;}
+.tl-gkpi{font-size:9px;color:#b4b2a9;font-style:italic;padding-left:190px;margin-bottom:7px;}
+.alloc-layer-block{margin-bottom:20px;}
+.alloc-layer-lbl{font-size:9px;color:#888780;font-style:italic;margin-bottom:6px;}
+.alloc-chart-row{display:flex;align-items:flex-start;}
+.alloc-y-axis{width:34px;flex-shrink:0;position:relative;}
+.alloc-y-tick{position:absolute;right:5px;font-size:8px;color:#b4b2a9;transform:translateY(50%);}
+.alloc-canvas{flex:1;position:relative;background:#f9f8f5;border-radius:3px;overflow:hidden;}
+.alloc-gridline{position:absolute;left:0;right:0;height:.5px;background:rgba(0,0,0,.07);}
+.alloc-vseg{position:absolute;overflow:hidden;display:flex;align-items:flex-start;padding-top:2px;justify-content:center;font-size:8px;font-weight:500;white-space:nowrap;color:rgba(0,0,0,.45);}
+.alloc-today{position:absolute;top:0;width:1.5px;height:100%;background:#e24b4a;opacity:.8;z-index:5;}
+.alloc-note{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px;padding-left:34px;}
+.alloc-legend{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;padding-left:34px;}
+.alloc-leg-item{display:flex;align-items:center;gap:3px;font-size:9px;color:#5f5e5a;}
+.alloc-leg-sw{width:8px;height:8px;border-radius:1px;flex-shrink:0;}
+.download-btn{margin-top:24px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:#185fa5;background:#e6f1fb;border:.5px solid #85b7eb;border-radius:6px;padding:7px 14px;cursor:pointer;text-decoration:none;}
+.download-btn:hover{background:#b5d4f4;}
+.clear-btn{font-size:11px;color:#888780;text-decoration:none;border:.5px solid #d3d1c7;border-radius:6px;padding:7px 14px;display:inline-block;vertical-align:middle;margin-left:8px;}
+</style>
+</head>
+<body>
+<h1 id="page-title">AMA Testing Agenda</h1>
+<p class="subtitle">Domain 123 = 80% sitewide &middot; Domain 124 = 20% sitewide &middot; <em>All dates are tentative and subject to change.</em></p>
+
+<div class="legend">
+  <span class="leg-item"><span class="leg-sw" id="leg-ao-sw"></span><span id="leg-ao-lbl">Always On ramp</span></span>
+  <span class="leg-item"><span class="leg-sw" style="background:#888780"></span>Long-Term Holdout</span>
+  <span class="leg-item"><span class="leg-sw" style="background:#85b7eb"></span>Cash Flow</span>
+  <span class="leg-item"><span class="leg-sw" style="background:#cecbf6"></span>Personal Loans</span>
+  <span class="leg-item"><span class="leg-sw" style="background:#fac775"></span>Dashboard</span>
+  <span class="leg-item"><span class="leg-sw" style="background:#ed93b1"></span>Credit</span>
+  <span class="leg-item"><span class="leg-sw" style="background:#6dcaaa"></span>Chat Optimization</span>
+  <span class="leg-item"><span style="font-size:11px;line-height:1">&#128204;</span>&nbsp;Txns to default 4/1</span>
+  <span class="leg-item"><span class="leg-sw" style="background:#e24b4a;width:3px;border-radius:1px"></span>Today</span>
+</div>
+
+<div class="section-title">Timeline</div>
+<div class="two-col">
+  <div id="tl-123"></div>
+  <div id="tl-124"></div>
+</div>
+
+<div class="section-title">Layer allocation over time</div>
+<p style="font-size:10px;color:#888780;margin-bottom:14px;">Y-axis = % of layer (0-100%). X-axis = time. Controls float to top. Always On band grows as ramp increases.</p>
+<div class="two-col">
+  <div id="al-123"></div>
+  <div id="al-124"></div>
+</div>
+
+<br>
+<a class="download-btn" href="#" onclick="downloadHTML();return false;">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="#185fa5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  Download as HTML
+</a>
+<a class="clear-btn" href="https://www.creditkarma.com/in/clear" target="_blank">Clear all force links</a>
+
+<script>
+var TODAY = new Date();
+var RS = new Date(2026,2,1);
+var RE = new Date(2026,7,1);
+var CHART_H_123 = 260;
+var CHART_H_124 = 160;
+var PH = 'TBD';
+var SI = 100/3;
+var PIN_DATE = new Date(2026,3,1);
+
+var AO_RAMP = [
+  {label:'5%',  swPct:5,  start:'2026-03-11',end:'2026-04-14',fill:'#d4edc0',text:'#27500a'},
+  {label:'10%', swPct:10, start:'2026-04-15',end:'2026-05-14',fill:'#c0dd97',text:'#27500a'},
+  {label:'25%', swPct:25, start:'2026-05-15',end:'2026-06-14',fill:'#97c459',text:'#27500a'},
+  {label:'50%', swPct:50, start:'2026-06-15',end:'2026-07-14',fill:'#639922',text:'#eaf3de'},
+  {label:'75%', swPct:75, start:'2026-07-15',end:'2026-08-01',fill:'#3b6d11',text:'#eaf3de'}
+];
+
+var FORCE_IDS = {
+  71788:{'Control':234055,'pl_entrypoint':234056},
+  72078:{'Champion: Credit Tab':234042},
+  72082:{'Control':234053},
+  72085:{'Cash Flow + Txns':234061},
+  72086:{'Click':234063,'Click + Optimization':234065,'Control':234062,'Typing':234064,'Typing + Optimization':234066}
+};
+
+function forceLink(testId,gname){
+  if(FORCE_IDS[testId]&&FORCE_IDS[testId][gname]!==undefined)
+    return 'https://www.creditkarma.com/in/variation?id='+FORCE_IDS[testId][gname];
+  return null;
+}
+
+var COLORS={
+  72078:'#9fe1cb',720780:'#5dcaa5',720781:'#9fe1cb',
+  72082:'#888780',72085:'#85b7eb',71788:'#cecbf6',
+  72086:'#fac775',88001:'#6dcaaa',88002:'#ed93b1',
+  88003:'#85b7eb',88004:'#6dcaaa',ctrl:'#e8e6de'
+};
+var AB_SHADES={
+  72086:['#fac775','#f0b050','#e09040','#cc7830','#b86020'],
+  88001:['#6dcaaa'],
+  88002:['#ed93b1','#d4537e','#c04570','#a83562','#903060','#781050'],
+  88003:['#b5d4f4','#85b7eb','#5090d0'],
+  88004:['#6dcaaa','#4db896']
+};
+var FIXED_OFFSETS={
+  '40569':{'Champion: Credit Tab':{fixedPct:6.3,ao:true},'Cash Flow + Txns':{fixedPct:25,topOffset:6.3},'pl_entrypoint':{fixedPct:12.5,topOffset:31.3},'Control':{fixedPct:6.3,topOffset:0}},
+  '40569d1':{'Champion: Dashboard':{fixedPct:6.3,ao:true},'Control':{fixedPct:6.3,topOffset:0}},
+  '40569d2':{'Champion: Cash Flow Tab':{fixedPct:6.3,ao:true},'Control':{fixedPct:6.3,topOffset:0}}
+};
+
+function parseDate(s){var p=s.split('-');return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));}
+function fmtDate(s){if(!s)return'ongoing';var p=s.split('-');return parseInt(p[1])+'/'+parseInt(p[2])+'/'+p[0].slice(2);}
+function toPos(v){var d=(typeof v==='string')?parseDate(v):v;return Math.max(0,Math.min(100,(d-RS)/(RE-RS)*100));}
+function swPct(domId,p){return Math.round(p*(domId===123?0.80:0.20)*10)/10;}
+function darwinLink(id){var ids=[72078,72082,72085,71788,72086];for(var i=0;i<ids.length;i++)if(ids[i]===id)return'https://evolve.admin.creditkarma.com/darwin/experiments/'+id+'/overview';return null;}
+function getRamp(t){return t.noRamp?[]:AO_RAMP;}
+function curRampPhase(t){var r=getRamp(t);for(var i=r.length-1;i>=0;i--)if(TODAY>=parseDate(r[i].start))return r[i];return null;}
+function pillClass(type){if(type==='Always On')return'pill-ao';if(type==='Long-Term Holdout')return'pill-lth';if(type==='Data Collection')return'pill-dc';return'pill-ab';}
+function isCtrl(name){return name.toLowerCase().indexOf('control')===0;}
+function makePill(text,cls){return '<span class="pill '+cls+'">'+text+'</span>';}
+function makeToolPill(text){return '<span class="pill pill-tool">'+text+'</span>';}
+function makeNotePill(text){return '<span class="pill pill-note">'+text+'</span>';}
+
+// Data — tools and notes are separate arrays
+var d123={id:123,label:'123 - Long-Term Analysis',layers:[
+  {id:'40569',label:'Layer 40569',tests:[
+    {id:72078,name:'AMA Always On: Credit Tab',type:'Always On',start:'2026-03-11',end:null,ao:true,noRamp:false,
+     goal:'Measure holistic AMA impact',kpi:'Sitewide metrics, CTR, AMA chat performance (incl. retention)',
+     tools:[],toolSubNote:null,
+     notes:['Ongoing testing on credit tab surface in experimentation domain will inform future Always On strategy'],
+     groups:[{name:'Champion: Credit Tab',pct:6.3}]},
+    {id:72082,name:'AMA Holdout',type:'Long-Term Holdout',start:'2026-03-11',end:null,ao:false,
+     goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
+     tools:[],toolSubNote:null,notes:[],
+     groups:[{name:'Control',pct:6.3}]},
+    {id:72085,name:'Cash Flow Static Banner',type:'Data Collection',start:'2026-03-11',end:'2026-04-20',ao:false,
+     goal:'Collect prompts for DS / Evals',kpi:'Chat log data',
+     tools:['txns_tool loaded'],toolSubNote:null,notes:[],
+     groups:[{name:'Cash Flow + Txns',pct:25}]},
+    {id:71788,name:'PL AMA Entrypoint Phase 0',type:'Data Collection',start:'2026-03-11',end:'2026-04-19',ao:false,
+     goal:'Collect prompts for DS / Evals',kpi:'Chat log data',
+     tools:['pl_tool loaded'],toolSubNote:'*no txns_tool',notes:[],
+     groups:[{name:'pl_entrypoint',pct:12.5}]}
+  ]},
+  {id:'40569d1',label:'Layer 40569 dup #1',tests:[
+    {id:720781,name:'AMA Always On: Dashboard',type:'Always On',start:'2026-04-22',end:null,ao:true,noRamp:false,
+     goal:'Measure holistic AMA impact',kpi:'Sitewide metrics, CTR, AMA chat performance (incl. retention)',
+     tools:[],toolSubNote:null,
+     notes:['Ongoing testing on dashboard surface in experimentation domain will inform future Always On strategy'],
+     groups:[{name:'Champion: Dashboard',pct:6.3}]},
+    {id:72082,name:'AMA Holdout',type:'Long-Term Holdout',start:'2026-03-11',end:null,ao:false,allocOnly:true,
+     goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
+     tools:[],toolSubNote:null,notes:[],
+     groups:[{name:'Control',pct:6.3}]}
+  ]},
+  {id:'40569d2',label:'Layer 40569 dup #2',tests:[
+    {id:720780,name:'AMA Always On: Cash Flow Tab',type:'Always On',start:'2026-04-20',end:null,ao:true,noRamp:false,
+     goal:'Measure holistic AMA impact',kpi:'Sitewide metrics, CTR, AMA chat performance (incl. retention)',
+     tools:[],toolSubNote:null,
+     notes:['Ongoing testing on cash flow surface in experimentation domain will inform future Always On strategy'],
+     groups:[{name:'Champion: Cash Flow Tab',pct:6.3}]},
+    {id:72082,name:'AMA Holdout',type:'Long-Term Holdout',start:'2026-03-11',end:null,ao:false,allocOnly:true,
+     goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
+     tools:[],toolSubNote:null,notes:[],
+     groups:[{name:'Control',pct:6.3}]}
+  ]}
+]};
+
+var d124={id:124,label:'124 - Experimentation',layers:[
+  {id:'40734',label:'Layer 40734',tests:[
+    {id:72086,name:'Dashboard Prompt Bar',type:'Multivariate A/B',start:'2026-03-11',end:'2026-05-05',ao:false,
+     goal:'Determine winning prompt bar variant; measure AMA impact on dashboard',
+     kpi:'Sitewide metrics (dashboard only), surface retention, CTR, AMA chat performance (incl. retention)',
+     tools:['txns_tool loaded','credit_history_tool loaded'],toolSubNote:null,
+     notes:['3/11-4/1: txns tool test. 4/21-5/5: credit history tool test (swapped)'],
+     groups:[{name:'Click',pct:2.5},{name:'Click + Optimization',pct:2.5},{name:'Control',pct:2.5},{name:'Typing',pct:2.5},{name:'Typing + Optimization',pct:2.5}]},
+    {id:88002,name:'Credit Tab Test',type:'Multivariate A/B',start:'2026-04-21',end:'2026-05-21',ao:false,
+     goal:'Determine if new entry points are comparable to champion; assess impact of all 4 combined',
+     kpi:'CTR, chat performance, surface retention',
+     tools:['credit_history_tool loaded'],toolSubNote:null,
+     notes:['Will use early click vs. type winner from Dashboard Prompt Bar test','If any entry point underperforms, may re-test with top performers only'],
+     groups:[
+       {name:'Banner',pct:14.6},{name:"See what's changed",pct:14.6},
+       {name:'Credit graph sparkle',pct:14.6},{name:'Credit factors sparkle',pct:14.6},
+       {name:'Prompt bar',pct:14.6},{name:'Banner + SWC + Sparkles (CG and CF) + Prompt bar',pct:14.5}
+     ]}
+  ]},
+  {id:'TBD-A',label:'New Layer A - Chat History',tests:[
+    {id:88001,name:'Chat History Test',type:'Multivariate A/B',start:'2026-04-21',end:'2026-05-21',ao:false,
+     goal:'Evaluate usage and feasibility of chat history feature',
+     kpi:'CTR, chat performance (incl. weekly AMA retention)',
+     tools:[],toolSubNote:null,
+     notes:['Caution: if tools tested here are not ramped to default after closing, users cannot continue those chats - historical chats rely on the same tools to continue conversation adequately'],
+     groups:[{name:'History ON',pct:50},{name:'Control',pct:50}]}
+  ]},
+  {id:'TBD-B',label:'New Layer B - Spending Insights',tests:[
+    {id:88003,name:'Spending Insights Test',type:'Multivariate A/B',start:'2026-04-30',end:'2026-06-30',ao:false,
+     goal:'Determine if spending insights should re-route users to AMA',
+     kpi:'CTR, surface retention, chat performance, insights-specific KPIs',
+     tools:[],toolSubNote:null,
+     notes:['Requires sign-off from FM team before launch'],
+     groups:[{name:'Insights - general',pct:SI},{name:'Insights - AMA',pct:SI},{name:'Cash flow banner',pct:SI}]}
+  ]},
+  {id:'TBD-C',label:'New Layer C - PL Tool Test (TBD)',tests:[
+    {id:88004,name:'PL Tool Test',type:'Multivariate A/B',start:'2026-06-01',end:null,ao:false,
+     goal:'Test PL tool in AMA via active experiment entry points (or new entry point if needed)',
+     kpi:'Chat performance (incl. weekly AMA retention)',
+     tools:['pl_tool loaded'],toolSubNote:null,
+     notes:['Very TBD - requires optimizations before testing is feasible','Will use active experiment entry points to surface PL tool, or add a dedicated entry point if needed'],
+     groups:[{name:'PL Tool ON',pct:50},{name:'Control',pct:50}]}
+  ]}
+]};
+
+var domains=[d123,d124];
+
+function makeTicks(leftPad){
+  var wrap=document.createElement('div');wrap.className='ticks';wrap.style.marginLeft=leftPad+'px';
+  var m=new Date(RS.getFullYear(),RS.getMonth(),1),first=true;
+  while(m<=RE){
+    if(!first){
+      var p=toPos(m);
+      var tk=document.createElement('div');tk.className='tick';tk.style.left=p+'%';
+      tk.textContent=m.toLocaleString('default',{month:'short'})+" '"+String(m.getFullYear()).slice(2);
+      wrap.appendChild(tk);
+      var tl=document.createElement('div');tl.className='tick-line';tl.style.left=p+'%';wrap.appendChild(tl);
+    }
+    first=false;m=new Date(m.getFullYear(),m.getMonth()+1,1);
+  }
+  var tv=document.createElement('div');tv.className='today-mark';tv.style.left=toPos(TODAY)+'%';wrap.appendChild(tv);
+  return wrap;
+}
+
+function buildTimeline(domId,cid){
+  var dom=(domId===123)?d123:d124;
+  var root=document.getElementById(cid);root.innerHTML='';
+  var lbl=document.createElement('div');lbl.className='col-label';lbl.textContent=dom.label;root.appendChild(lbl);
+  root.appendChild(makeTicks(190));
+  var todayP=toPos(TODAY);
+
+  for(var li=0;li<dom.layers.length;li++){
+    var layer=dom.layers[li];
+    var ll=document.createElement('div');ll.className='tl-layer-lbl';ll.textContent=layer.label;root.appendChild(ll);
+    for(var ti=0;ti<layer.tests.length;ti++){
+      var t=layer.tests[ti];
+      if(t.allocOnly)continue;
+      var link=darwinLink(t.id);
+      var ncPct=0;
+      for(var gi=0;gi<t.groups.length;gi++)if(!isCtrl(t.groups[gi].name))ncPct+=t.groups[gi].pct;
+      var cur=curRampPhase(t);
+      var swTxt=t.ao?(cur?cur.swPct+'% sw':'0% sw - not yet ramped'):(swPct(domId,ncPct)+'% sw');
+      var swColor=t.ao&&cur?'#3b6d11':t.ao?'#888780':'#1a1a18';
+      var barColor=t.ao?(cur?cur.fill:'#d4edc0'):(COLORS[t.id]||'#d3d1c7');
+
+      // Bar row
+      var row=document.createElement('div');row.className='tl-row';
+      var nm=document.createElement('div');nm.className='tl-name';nm.textContent=t.name;nm.title=t.name;row.appendChild(nm);
+      var track=document.createElement('div');track.className='tl-track';
+      var todayEl=document.createElement('div');todayEl.className='tl-today';todayEl.style.left=todayP+'%';track.appendChild(todayEl);
+      var sp=toPos(t.start),ep=t.end?toPos(t.end):100,wp=Math.max(ep-sp,0.5),isOpen=!t.end;
+      var bar=document.createElement('div');bar.className='tl-bar'+(isOpen?' open':'');
+      bar.style.cssText='left:'+sp+'%;width:'+wp+'%;background:'+barColor;
+      track.appendChild(bar);
+      // Pin at 4/1
+      var showPin=(t.ao&&t.id!==72082)||domId===124;
+      if(showPin){
+        var pin=document.createElement('div');
+        pin.style.cssText='position:absolute;left:'+toPos(PIN_DATE)+'%;top:-2px;font-size:11px;transform:translateX(-50%);z-index:5;cursor:default;line-height:1;';
+        pin.textContent='\uD83D\uDCCC';pin.title='Txns ramped to default 4/1';
+        track.appendChild(pin);
+      }
+      row.appendChild(track);root.appendChild(row);
+
+      // Line 1: type pill, link, dates, sw%
+      var meta=document.createElement('div');meta.className='tl-meta';
+      var mh=makePill(t.type,pillClass(t.type));
+      if(link)mh+=' <a href="'+link+'" target="_blank" class="lnk">Link</a>';
+      mh+=' <span style="font-size:9px;color:#b4b2a9">'+fmtDate(t.start)+' to '+fmtDate(t.end)+'</span>';
+      mh+=' <span style="font-size:9px;font-weight:500;color:'+swColor+'">'+swTxt+'</span>';
+      meta.innerHTML=mh;root.appendChild(meta);
+
+      // Line 2: tool pills
+      if(t.tools&&t.tools.length){
+        var row2=document.createElement('div');row2.className='tl-row2';
+        var r2h='';
+        for(var ti2=0;ti2<t.tools.length;ti2++)r2h+=makeToolPill(t.tools[ti2])+' ';
+        if(t.toolSubNote)r2h+='<span style="font-size:9px;color:#888780;font-style:italic;">'+t.toolSubNote+'</span>';
+        row2.innerHTML=r2h;root.appendChild(row2);
+      }
+
+      // Line 3: note pills
+      if(t.notes&&t.notes.length){
+        var row3=document.createElement('div');row3.className='tl-row3';
+        var r3h='';
+        for(var ni=0;ni<t.notes.length;ni++)r3h+=makeNotePill(t.notes[ni])+' ';
+        row3.innerHTML=r3h;root.appendChild(row3);
+      }
+
+      // Goal/KPI
+      var gk=document.createElement('div');gk.className='tl-gkpi';
+      gk.textContent='Goal: '+(t.goal===PH?'TBD':t.goal)+' - KPIs: '+(t.kpi===PH?'TBD':t.kpi);
+      root.appendChild(gk);
+    }
+  }
+}
+
+function buildAlloc(domId,cid){
+  var dom=(domId===123)?d123:d124;
+  var CHART_H=domId===123?CHART_H_123:CHART_H_124;
+  var root=document.getElementById(cid);root.innerHTML='';
+  var lbl=document.createElement('div');lbl.className='col-label';lbl.textContent=dom.label;root.appendChild(lbl);
+  root.appendChild(makeTicks(38));
+  var todayP=toPos(TODAY);
+
+  for(var li=0;li<dom.layers.length;li++){
+    var layer=dom.layers[li];
+    var lb=document.createElement('div');lb.className='alloc-layer-block';
+    var ll=document.createElement('div');ll.className='alloc-layer-lbl';ll.textContent=layer.label;lb.appendChild(ll);
+    var chartRow=document.createElement('div');chartRow.className='alloc-chart-row';
+    var yAxis=document.createElement('div');yAxis.className='alloc-y-axis';yAxis.style.height=CHART_H+'px';
+    var yVals=[100,75,50,25,0];
+    for(var yi=0;yi<yVals.length;yi++){
+      var yt=document.createElement('div');yt.className='alloc-y-tick';
+      yt.style.bottom=(yVals[yi]/100*CHART_H-5)+'px';yt.textContent=yVals[yi]+'%';yAxis.appendChild(yt);
+    }
+    chartRow.appendChild(yAxis);
+    var canvas=document.createElement('div');canvas.className='alloc-canvas';canvas.style.height=CHART_H+'px';
+    for(var gvi=0;gvi<3;gvi++){
+      var gl=document.createElement('div');gl.className='alloc-gridline';
+      gl.style.top=((1-(gvi+1)*25/100)*CHART_H)+'px';canvas.appendChild(gl);
+    }
+    var todayEl=document.createElement('div');todayEl.className='alloc-today';todayEl.style.left=todayP+'%';canvas.appendChild(todayEl);
+
+    var allGroups=[];
+    for(var ti=0;ti<layer.tests.length;ti++){var t=layer.tests[ti];for(var gi=0;gi<t.groups.length;gi++)allGroups.push({t:t,g:t.groups[gi],gi:gi});}
+    var useFixed=FIXED_OFFSETS[layer.id]!==undefined;
+    if(!useFixed)allGroups.sort(function(a,b){return(isCtrl(a.g.name)?0:1)-(isCtrl(b.g.name)?0:1);});
+    var cursor=0,groupDefs=[];
+    for(var agi=0;agi<allGroups.length;agi++){groupDefs.push({t:allGroups[agi].t,g:allGroups[agi].g,gi:allGroups[agi].gi,offset:cursor});cursor+=allGroups[agi].g.pct;}
+
+    var legItems=[];
+    for(var di=0;di<groupDefs.length;di++){
+      var def=groupDefs[di],t=def.t,g=def.g,gi=def.gi,offset=def.offset;
+      var ctrl=isCtrl(g.name),shades=AB_SHADES[t.id];
+      var fill=ctrl?COLORS.ctrl:(shades?(shades[gi]||shades[shades.length-1]):(COLORS[t.id]||'#d3d1c7'));
+      if(t.ao){
+        var ramp=getRamp(t),sd=parseDate(t.start),ed=t.end?parseDate(t.end):RE;
+        for(var ri=0;ri<ramp.length;ri++){
+          var ph=ramp[ri],ps=parseDate(ph.start),pe=parseDate(ph.end);
+          var ss=ps<sd?sd:ps,se=pe>ed?ed:pe;if(se<=ss)continue;
+          var segSp=toPos(ss),segEp=Math.min(toPos(se),100),segWp=Math.max(segEp-segSp,0.2);
+          var lp=domId===123?(ph.swPct/80*100):(ph.swPct/20*100);
+          var segH=Math.min(lp/100*CHART_H,CHART_H),segTop=CHART_H-segH;
+          var seg=document.createElement('div');seg.className='alloc-vseg';
+          seg.style.cssText='left:'+segSp+'%;width:'+segWp+'%;top:'+segTop+'px;height:'+segH+'px;background:'+ph.fill+';color:'+ph.text+';';
+          seg.title=g.name+' - '+ph.swPct+'% sitewide';if(segWp>10&&segH>12)seg.textContent=ph.label;
+          canvas.appendChild(seg);
+        }
+        var curSw=curRampPhase(t)?curRampPhase(t).swPct+'% sw':'0% sw';
+        legItems.push({name:g.name,fill:curRampPhase(t)?curRampPhase(t).fill:'#d4edc0',sw:curSw,testId:t.id});
+      } else if(useFixed&&FIXED_OFFSETS[layer.id]&&FIXED_OFFSETS[layer.id][g.name]){
+        var fo=FIXED_OFFSETS[layer.id][g.name];
+        var sp2=toPos(t.start),ep2=t.end?toPos(t.end):100,wp2=Math.max(ep2-sp2,0.3);
+        var yH2=(fo.fixedPct/100)*CHART_H,yTop2=(fo.topOffset/100)*CHART_H;
+        var seg2=document.createElement('div');seg2.className='alloc-vseg';
+        seg2.style.cssText='left:'+sp2+'%;width:'+wp2+'%;top:'+yTop2+'px;height:'+yH2+'px;background:'+fill+';position:absolute;';
+        var swLbl2=swPct(domId,fo.fixedPct)+'%';seg2.title=g.name+' - '+swLbl2+' sitewide';
+        if(yH2>8&&wp2>5){var sl=document.createElement('span');sl.style.cssText='position:absolute;top:2px;left:0;right:0;text-align:center;font-size:8px;font-weight:500;color:rgba(0,0,0,.5);pointer-events:none;';sl.textContent=swLbl2;seg2.appendChild(sl);}
+        canvas.appendChild(seg2);legItems.push({name:g.name,fill:fill,sw:swLbl2+' sw',testId:t.id});
+      } else {
+        var sp3=toPos(t.start),ep3=t.end?toPos(t.end):100,wp3=Math.max(ep3-sp3,0.3);
+        var yTop3=(1-(offset+g.pct)/100)*CHART_H,yH3=(g.pct/100)*CHART_H;
+        var seg3=document.createElement('div');seg3.className='alloc-vseg';
+        seg3.style.cssText='left:'+sp3+'%;width:'+wp3+'%;top:'+yTop3+'px;height:'+yH3+'px;background:'+fill+';';
+        var swLbl3=swPct(domId,g.pct)+'%';seg3.title=g.name+' - '+swLbl3+' sitewide';
+        if(yH3>10&&wp3>5)seg3.textContent=swLbl3;
+        canvas.appendChild(seg3);legItems.push({name:g.name,fill:fill,sw:swLbl3+' sw',testId:t.id});
+      }
+    }
+
+    chartRow.appendChild(canvas);lb.appendChild(chartRow);
+    var legEl=document.createElement('div');legEl.className='alloc-legend';
+    var seen={};
+    for(var legi=0;legi<legItems.length;legi++){
+      var li2=legItems[legi];if(seen[li2.name])continue;seen[li2.name]=true;
+      var fl=forceLink(li2.testId,li2.name);
+      var lh='<span class="alloc-leg-item"><span class="alloc-leg-sw" style="background:'+li2.fill+'"></span>'+li2.name+' ('+li2.sw+')';
+      if(fl)lh+=' <a href="'+fl+'" target="_blank" style="color:#854f0b;text-decoration:none;font-size:11px;" title="Force: '+li2.name+'">&#9889;</a>';
+      lh+='</span>';legEl.innerHTML+=lh;
+    }
+    lb.appendChild(legEl);
+
+    var layerNotes=[];
+    if(layer.id==='40569d1'||layer.id==='40569d2')layerNotes.push({c:'tag-g',t:'Same population as Layer 40569 (Credit Tab Always On)'});
+    if(layer.id==='40569d1')layerNotes.push({c:'tag-a',t:'Dashboard can be ramped lower than Credit Tab if needed'});
+    if(layer.id==='40734'||layer.id==='TBD-B')layerNotes.push({c:'tag-g',t:'If sitewide read is needed, use AMA Holdout (domain 123) - impact scoped to surface only (not holistic sitewide)'});
+    if(layerNotes.length){
+      var nn2=document.createElement('div');nn2.className='alloc-note';
+      var nh2='';for(var nni=0;nni<layerNotes.length;nni++)      nh2+='<span style="display:inline-block;border-radius:3px;font-size:9px;padding:1px 5px;font-weight:500;background:#e1f5ee;color:#0f6e56;margin-right:3px;">'+layerNotes[nni].t+'</span>';
+      nn2.innerHTML=nh2;lb.appendChild(nn2);
+    }
+    root.appendChild(lb);
+  }
+}
+
+var todayLabel=TODAY.toLocaleString('default',{month:'short'})+' '+TODAY.getDate()+', '+TODAY.getFullYear();
+document.getElementById('page-title').textContent='AMA Testing Agenda: '+todayLabel;
+buildTimeline(123,'tl-123');
+buildTimeline(124,'tl-124');
+buildAlloc(123,'al-123');
+buildAlloc(124,'al-124');
+
+var curPhase=curRampPhase({ao:true,noRamp:false,start:'2026-03-11'});
+if(!curPhase)curPhase=AO_RAMP[0];
+document.getElementById('leg-ao-sw').style.background=curPhase.fill;
+document.getElementById('leg-ao-lbl').textContent='Always On ramp ('+curPhase.label+' sitewide)';
+
+function downloadHTML(){
+  var blob=new Blob(['<!DOCTYPE html>\n'+document.documentElement.outerHTML],{type:'text/html'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ama_testing_agenda.html';a.click();URL.revokeObjectURL(a.href);
+}
+</script>
+</body>
+</html>
