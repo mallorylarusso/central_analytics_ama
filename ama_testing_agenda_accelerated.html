@@ -62,7 +62,7 @@ a.lnk:hover{text-decoration:underline;}
 .tl-tip{position:absolute;z-index:20;cursor:default;}
 .tl-tip .tl-tip-label{display:none;position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:#1a1a18;color:#fff;font-size:10px;white-space:nowrap;padding:3px 7px;border-radius:4px;pointer-events:none;font-style:normal;font-weight:400;}
 .tl-tip:hover .tl-tip-label{display:block;}
-.ramp-box{background:#f0fbe6;border:1px solid #97c459;border-radius:8px;padding:16px 20px;margin:16px 0;max-width:820px;}
+.ramp-box{background:#f0fbe6;border:1px solid #97c459;border-radius:8px;padding:16px 20px;margin:16px 0;max-width:1400px;}
 .ramp-box h2{font-size:13px;font-weight:600;color:#27500a;margin-bottom:8px;}
 .ramp-table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:12px;}
 .ramp-table th{text-align:left;font-weight:500;color:#73726c;padding:4px 8px;border-bottom:1px solid #c0dd97;font-size:10px;text-transform:uppercase;letter-spacing:.04em;}
@@ -74,12 +74,12 @@ a.lnk:hover{text-decoration:underline;}
 .metrics-box ul{list-style:disc;padding-left:18px;font-size:11px;color:#5f5e5a;margin-bottom:8px;}
 .metrics-box li{margin-bottom:2px;}
 .metrics-box .revenue{font-size:11px;color:#1a1a18;font-weight:500;padding:6px 10px;background:#fef3cd;border-radius:4px;display:inline-block;}
-.caveats-box{background:#fff8e1;border:1px solid #f0e6a0;border-radius:8px;padding:16px 20px;margin:16px 0;max-width:820px;}
+.caveats-box{background:#fff8e1;border:1px solid #f0e6a0;border-radius:8px;padding:16px 20px;margin:16px 0;max-width:1400px;}
 .caveats-box h2{font-size:13px;font-weight:600;color:#856404;margin-bottom:10px;}
 .caveats-box ul{list-style:none;padding:0;font-size:11px;color:#5f5e5a;}
 .caveats-box li{margin-bottom:8px;padding-left:18px;position:relative;}
 .caveats-box li::before{content:'\26A0';position:absolute;left:0;top:0;}
-.prereq-box{background:#e6f1fb;border:1px solid #85b7eb;border-radius:8px;padding:16px 20px;margin:16px 0;max-width:820px;}
+.prereq-box{background:#e6f1fb;border:1px solid #85b7eb;border-radius:8px;padding:16px 20px;margin:16px 0;max-width:1400px;}
 .prereq-box h2{font-size:13px;font-weight:600;color:#1a4a7a;margin-bottom:10px;}
 .prereq-box ul{list-style:none;padding:0;font-size:11px;color:#1a1a18;}
 .prereq-box li{margin-bottom:6px;padding-left:22px;position:relative;}
@@ -89,29 +89,27 @@ a.lnk:hover{text-decoration:underline;}
 </head>
 <body>
 <h1 id="page-title">AMA Testing Agenda (Accelerated)</h1>
-<p class="subtitle">Domain 123 = 80% sitewide &middot; Domain 124 = 20% sitewide &middot; <em>All dates and ramp %s are tentative and subject to change.</em> &middot; <strong style="color:#e24b4a;">ACCELERATED RAMP &mdash; Dashboard Only</strong></p>
+<p class="subtitle">Domain 123 = 80% sitewide &middot; Domain 124 = 20% sitewide &middot; <em>All dates and ramp %s are tentative and subject to change.</em> &middot; <strong style="color:#e24b4a;">ACCELERATED RAMP &mdash; Dashboard Prompt Bar</strong></p>
 
 <!-- Ramp Schedule Box -->
 <div class="ramp-box">
   <h2>Accelerated Ramp Schedule &mdash; Dashboard (Typing variant)</h2>
   <table class="ramp-table">
-    <tr><th>Date</th><th>Sitewide %</th><th>Domain 123 (80% sw)</th><th>Notes</th></tr>
-    <tr><td>Thu 4/16</td><td><strong>10%</strong></td><td>12.5% of layer</td><td></td></tr>
-    <tr><td>Mon 4/21</td><td><strong>25%</strong></td><td>31.25% of layer</td><td></td></tr>
-    <tr><td>Tue 4/22</td><td><strong>50%</strong></td><td>62.5% of layer</td><td></td></tr>
-    <tr class="highlight"><td>Wed 4/23</td><td><strong>90%</strong></td><td>Ramp to default</td><td>Close experiment &amp; promote; AMA Holdouts already at 10%</td></tr>
+    <tr><th>Date</th><th>Sitewide %</th><th>Domain 123 (80% sw)</th><th>Domain 124 (20% sw)</th><th>Notes</th></tr>
+    <tr><td>Thu 4/16</td><td><strong>10%</strong></td><td>12.5% of layer</td><td>—</td><td></td></tr>
+    <tr><td>Mon 4/21</td><td><strong>50%</strong></td><td>50% of layer (40% sw)</td><td>50% of layer (10% sw)</td><td>Hold 4 weeks — monitor sitewide engagement and revenue impact</td></tr>
+    <tr class="highlight"><td>~Wed 5/20</td><td><strong>90%</strong></td><td>Ramp to default</td><td>—</td><td>Close experiments &amp; promote; AMA Holdouts already at 10%</td></tr>
   </table>
   <div class="metrics-box">
-    <h3>Metrics monitored daily at each step:</h3>
+    <h3>Metrics monitored daily at each step <a href="https://docs.google.com/spreadsheets/d/1EbNdTPqykMSVChYvjRvq6mZdX2A0ZDZbdRxyljcnY98/edit?gid=1487756681#gid=1487756681&range=A1" target="_blank" style="font-size:10px;font-weight:400;">↗ GSheet Link</a></h3>
     <ul>
       <li>CTR</li>
       <li>% of Clicks with Message Sent</li>
       <li>Positive Feedback Rate</li>
-      <li>Offer Clicks</li>
-      <li>SDU</li>
       <li>Requests/min</li>
     </ul>
-    <span class="revenue">Estimated revenue impact: -$11.1M to +$13.0M/mo (low risk; worst case estimate given we're currently at a 2% ramp). This captures ~33% of the ramp opportunity while protecting against the -$14.5M+/mo Credit Tab risk.</span>
+    <span class="revenue">Estimated revenue impact at 90% sitewide: -$10.9M to +$12.7M/mo.</span>
+    <div style="margin-top:6px;font-size:11px;color:#5f5e5a;">If RpU lift holds (+0.8%) we should have enough power to get a stat sig revenue read after 4 weeks at 50% while cutting downside risk in half vs. ramping straight to 90%.</div>
   </div>
 </div>
 
@@ -119,10 +117,12 @@ a.lnk:hover{text-decoration:underline;}
 <div class="prereq-box">
   <h2>Pre-Requisites (before beginning phased Dashboard ramp)</h2>
   <ul>
-    <li>Close Dashboard Prompt Bar A/B test (72086) in domain 124 &mdash; winner = Typing</li>
+    <li class="done">Add Dashboard params to AMA Holdout and AMA Holdout #2.</li>
+    <li>Ramp AMA Holdout #2 to 5% sitewide.</li>
+    <li>Pause AMA Always On: Credit Tab (72078) in domain 123 because of stat sig negative revenue read. Resume after testing new entry points.</li>
+    <li>Close Dashboard Prompt Bar Initial Test (72086) in domain 124.</li>
+    <li>Check min app versions for Dashboard Prompt Bar variations (iOS 26.8, Android 26.13).</li>
     <li>Close PL AMA Entrypoint Phase 0 (71788). Tests are mutually exclusive today, but that won&rsquo;t be the case for long — PL must close before we ramp to ensure we don&rsquo;t expose the PL tool to any new entry point users as the ramp expands.</li>
-    <li>Add Dashboard params to AMA Holdout and AMA Holdout #2 before ramping</li>
-    <li>Ramp AMA Holdout #2 to 5% sitewide alongside first Dashboard ramp step (holdouts will be 10% combined on 4/23)</li>
   </ul>
 </div>
 
@@ -130,9 +130,9 @@ a.lnk:hover{text-decoration:underline;}
 <div class="caveats-box">
   <h2>Caveats &amp; Watch-Outs</h2>
   <ul>
-    <li><strong>Both holdouts must remain fixed and uncontaminated.</strong> AMA Holdout and AMA Holdout #2 (6.25% of layer each) are mirrored across all duplicate layers in domain 123. Do not adjust either holdout allocation at any ramp step — they are the long-term comparison groups for sitewide reads. Make sure to add new parameters to these holdouts before ramping to default.</li>
-    <li><strong>Dashboard Typing ramped to default on 4/23 (90% sitewide).</strong> Experiment closes on 4/23 and Dashboard Typing becomes the default experience. Two 5% holdouts (10% total) remain for sitewide AMA reads. Ramp approved 4/14.</li>
-    <li><strong>All test reads starting 4/23 will be on top of Dashboard prompt bar.</strong> Domain 124 experimentation may launch as early as 4/23 alongside the dashboard ramp to default.</li>
+    <li><strong>Both holdouts must remain fixed and uncontaminated.</strong> AMA Holdout and AMA Holdout #2 (6.25% of layer each) are mirrored across all duplicate layers in domain 123. Do not adjust either holdout allocation at any ramp step — they are the long-term comparison groups for sitewide reads. Specifically, new spending insights and credit entry points must be added to both holdouts before ramping those experiments.</li>
+    <li><strong>Dashboard Typing ramped to default ~5/20 (90% sitewide).</strong> Holds at 50% for 4 weeks, then experiment closes and Dashboard Typing becomes the default experience. Two 5% holdouts (10% total) remain for sitewide AMA reads. Ramp approved 4/14.</li>
+    <li><strong>Starting 4/16, users may begin to see multiple AMA experiences across surfaces.</strong></li>
   </ul>
 </div>
 
@@ -145,7 +145,7 @@ a.lnk:hover{text-decoration:underline;}
   <span class="leg-item"><span class="leg-sw" style="background:#ed93b1"></span>Credit</span>
   <span class="leg-item"><span class="leg-sw" style="background:#6dcaaa"></span>Chat Optimization</span>
   <span class="leg-item"><span style="font-size:11px;line-height:1">&#128204;</span>&nbsp;Txns to default 4/1</span>
-  <span class="leg-item"><span style="display:inline-block;width:8px;height:8px;background:#3b6d11;border-radius:2px;transform:rotate(45deg);"></span>&nbsp;Dashboard Typing to default 4/23 (90% sw)</span>
+  <span class="leg-item"><span style="display:inline-block;width:8px;height:8px;background:#3b6d11;border-radius:2px;transform:rotate(45deg);"></span>&nbsp;Dashboard Typing to default ~5/20 (90% sw)</span>
   <span class="leg-item"><span style="display:inline-block;width:8px;height:8px;background:#854f0b;border-radius:50%;"></span>&nbsp;Test Read</span>
   <span class="leg-item"><span class="leg-sw" style="background:#e24b4a;width:3px;border-radius:1px"></span>Today</span>
 </div>
@@ -157,7 +157,7 @@ a.lnk:hover{text-decoration:underline;}
 </div>
 
 <div class="section-title">Layer allocation over time</div>
-<p style="font-size:10px;color:#888780;margin-bottom:14px;">Y-axis = % of layer (0-100%). X-axis = time. Controls float to top. Always On band grows as ramp increases.</p>
+<p style="font-size:10px;color:#888780;margin-bottom:14px;">Y-axis = % of sitewide (0-100%). X-axis = time.</p>
 <div class="two-col">
   <div id="al-123"></div>
   <div id="al-124"></div>
@@ -185,18 +185,18 @@ var SLIDES_BASE = 'https://docs.google.com/presentation/d/1OZcZGHVTn31-0ZlaXSiE-
 var AO_RAMP = [
   {label:'5%',  swPct:5,  start:'2026-03-11',end:'2026-04-15',fill:'#d4edc0',text:'#27500a'},
   {label:'10%', swPct:10, start:'2026-04-16',end:'2026-04-20',fill:'#c0dd97',text:'#27500a'},
-  {label:'25%', swPct:25, start:'2026-04-21',end:'2026-04-22',fill:'#97c459',text:'#27500a'},
-  {label:'50%', swPct:50, start:'2026-04-22',end:'2026-04-23',fill:'#639922',text:'#eaf3de'}
+  {label:'50%', swPct:50, d123LayerPct:50, d124LayerPct:50, start:'2026-04-21',end:'2026-05-20',fill:'#639922',text:'#eaf3de'}
 ];
-var DASH_DEFAULT_DATE = '2026-04-23';
-var DASH_DEFAULT_PIN = new Date(2026,3,23);
+var DASH_DEFAULT_DATE = '2026-05-20';
+var DASH_DEFAULT_PIN = new Date(2026,4,20);
 
 var FORCE_IDS = {
   71788:{'Control':234055,'pl_entrypoint':234056},
   72078:{'Champion: Credit Tab':234042},
   72082:{'Control':234053},
   72085:{'Cash Flow + Txns':234061},
-  72086:{'Click':234063,'Click + Optimization':234065,'Control':234062,'Typing':234064,'Typing + Optimization':234066}
+  72086:{'Click':234063,'Click + Optimization':234065,'Control':234062,'Typing':234064,'Typing + Optimization':234066},
+  73738:{'Control #2':239399}
 };
 
 function forceLink(testId,gname){
@@ -206,11 +206,11 @@ function forceLink(testId,gname){
 }
 
 var COLORS={
-  72078:'#9fe1cb',720780:'#5dcaa5',720781:'#9fe1cb',720783:'#9fe1cb',
+  72078:'#9fe1cb',720780:'#5dcaa5',720781:'#fac775',720782:'#fac775',720783:'#9fe1cb',
   72082:'#888780',72085:'#85b7eb',71788:'#cecbf6',
   72086:'#fac775',88001:'#6dcaaa',88002:'#ed93b1',
   88003:'#85b7eb',88004:'#6dcaaa',88005:'#6dcaaa',
-  720784:'#888780',
+  73738:'#888780',
   ctrl:'#e8e6de'
 };
 var AB_SHADES={
@@ -221,28 +221,31 @@ var AB_SHADES={
   88004:['#6dcaaa','#4db896'],
   88005:['#6dcaaa','#d3d1c7'],
   88002:['#ed93b1','#d4537e','#c04570','#a83562','#903060','#781050'],
-  720784:['#888780']
+  73738:['#888780']
 };
 var FIXED_OFFSETS={
   '40569':{'Champion: Credit Tab':{fixedPct:6.3,ao:true},'Cash Flow + Txns':{fixedPct:25,topOffset:12.6},'pl_entrypoint':{fixedPct:12.5,topOffset:37.6},'Control':{fixedPct:6.25,topOffset:0},'Control #2':{fixedPct:6.25,topOffset:6.25}},
-  '40569d1':{'Champion: Dashboard':{fixedPct:6.3,ao:true},'Control':{fixedPct:6.25,topOffset:0},'Control #2':{fixedPct:6.25,topOffset:6.25}},
+  '40569d1':{'Typing Prompt Bar':{fixedPct:6.3,ao:true},'Control':{fixedPct:6.25,topOffset:0},'Control #2':{fixedPct:6.25,topOffset:6.25}},
   '40569d2':{'Champion: Cash Flow Tab':{fixedPct:6.3,ao:true},'Control':{fixedPct:6.25,topOffset:0},'Control #2':{fixedPct:6.25,topOffset:6.25}},
+  'TBD-DASH2':{'Typing Prompt Bar':{fixedPct:50,topOffset:50},'Control':{fixedPct:50,topOffset:0}},
 };
 
 function parseDate(s){var p=s.split('-');return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));}
 function fmtDate(s){if(!s)return'ongoing';var p=s.split('-');return parseInt(p[1])+'/'+parseInt(p[2])+'/'+p[0].slice(2);}
 function toPos(v){var d=(typeof v==='string')?parseDate(v):v;return Math.max(0,Math.min(100,(d-RS)/(RE-RS)*100));}
 function swPct(domId,p){return Math.round(p*(domId===123?0.80:0.20)*10)/10;}
-function darwinLink(id){var ids=[72078,72082,72085,71788,72086];for(var i=0;i<ids.length;i++)if(ids[i]===id)return'https://evolve.admin.creditkarma.com/darwin/experiments/'+id+'/overview';return null;}
+function darwinLink(id){var ids=[72078,72082,72085,71788,72086,73738];for(var i=0;i<ids.length;i++)if(ids[i]===id)return'https://evolve.admin.creditkarma.com/darwin/experiments/'+id+'/overview';return null;}
 var CT_RAMP = [
-  {label:'5%', swPct:5,  start:'2026-03-11',end:'2026-05-28',fill:'#d4edc0',text:'#27500a'},
-  {label:'20%',swPct:20, start:'2026-05-28',end:'2026-06-28',fill:'#97c459',text:'#27500a'},
+  {label:'5%', swPct:5,  start:'2026-03-11',end:'2026-04-16',fill:'#d4edc0',text:'#27500a'},
+  {label:'25%',swPct:25, start:'2026-05-28',end:'2026-06-28',fill:'#97c459',text:'#27500a'},
   {label:'50%',swPct:50, start:'2026-06-28',end:'2026-08-01',fill:'#639922',text:'#eaf3de'}
 ];
 var CF_RAMP = [
   {label:'50%',swPct:50, start:'2026-06-30',end:'2026-08-01',fill:'#639922',text:'#eaf3de'}
 ];
 function getRamp(t){if(t.noRamp)return[];if(t.id===72078)return CT_RAMP;if(t.id===720780)return CF_RAMP;return AO_RAMP;}
+function isDashAO(id){return id===720781;}
+function isDash2(id){return id===720782;}
 function curRampPhase(t){var r=getRamp(t);for(var i=r.length-1;i>=0;i--)if(TODAY>=parseDate(r[i].start))return r[i];return null;}
 function pillClass(type){if(type==='Always On')return'pill-ao';if(type==='Long-Term Holdout')return'pill-lth';if(type==='Data Collection')return'pill-dc';return'pill-ab';}
 function isCtrl(name){return name.toLowerCase().indexOf('control')===0;}
@@ -254,17 +257,19 @@ function makeWarnPill(text){return '<span class="pill pill-warn">'+text+'</span>
 // Data
 var d123={id:123,label:'123 - Long-Term Analysis',layers:[
   {id:'40569',label:'Layer 40569',tests:[
-    {id:72078,name:'AMA Always On: Credit Tab',type:'Always On',start:'2026-03-11',end:null,ao:true,noRamp:false,
+    {id:72078,name:'AMA Always On: Credit Tab',type:'Always On',start:'2026-03-11',end:'2026-08-01',ao:true,noRamp:false,
+     barEnd:'2026-04-16',
+     extraBars:[{start:'2026-05-28',end:'2026-06-28'},{start:'2026-06-28',end:'2026-08-01'}],
      goal:'Measure holistic AMA impact',kpi:'Sitewide metrics, CTR, AMA chat performance (incl. retention)',
      tools:[],toolSubNote:null,
-     notes:['Ramps after Credit Tab Test ends: 20% (5/28) \u2192 50% (6/28)'],
+     notes:['Turned off 4/16 due to stat sig negative revenue read','Resumes after Credit Tab Test ends: 25% (5/28) \u2192 50% (6/28)'],
      groups:[{name:'Champion: Credit Tab',pct:6.3}],
      test_reads:[{label:'Credit Tab AO Read',date:'2026-04-13',url:SLIDES_BASE+'p22'}]},
     {id:72082,name:'AMA Holdout',type:'Long-Term Holdout',start:'2026-03-11',end:null,ao:false,
      goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
      tools:[],toolSubNote:null,notes:['5% holdout remains consistent across all ramp steps'],
      groups:[{name:'Control',pct:6.25}]},
-    {id:720784,name:'AMA Holdout #2',type:'Long-Term Holdout',start:'2026-04-16',end:null,ao:false,
+    {id:73738,name:'AMA Holdout #2',type:'Long-Term Holdout',start:'2026-04-16',end:null,ao:false,
      goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
      tools:[],toolSubNote:null,notes:['5% holdout remains consistent across all ramp steps'],
      groups:[{name:'Control #2',pct:6.25}]},
@@ -280,16 +285,16 @@ var d123={id:123,label:'123 - Long-Term Analysis',layers:[
      groups:[{name:'pl_entrypoint',pct:12.5}]},
   ]},
   {id:'40569d1',label:'Layer 40569 dup #1',tests:[
-    {id:720781,name:'AMA Always On: Dashboard',type:'Always On',start:'2026-04-16',end:'2026-04-23',ao:true,noRamp:false,
-     goal:'Ramp AMA prompt bar to default slowly while monitoring impact at each step',kpi:'Sitewide metrics, CTR, AMA chat performance (incl. retention)',
+    {id:720781,name:'AMA Dashboard Typing Prompt Bar',type:'Multivariate A/B',start:'2026-04-16',end:'2026-05-20',ao:true,noRamp:false,
+     goal:'Ramp AMA prompt bar to default slowly while monitoring impact at each step',kpi:'Sitewide metrics (revenue, engagement), CTR, AMA chat performance (incl. retention)',
      tools:[],toolSubNote:null,
-     notes:['ACCELERATED: 10% (4/16) \u2192 25% (4/21) \u2192 50% (4/22)','Dashboard Typing ramped to default on 4/23','Typing variant selected as winner from Dashboard Prompt Bar test'],
-     groups:[{name:'Champion: Dashboard',pct:6.3}]},
+     notes:['ACCELERATED: 10% (4/16) \u2192 50% (4/21) \u2192 hold 4 weeks \u2192 default (~5/20)','Typing variant selected as winner from Dashboard Prompt Bar Initial Test','Dup of Layer 40569 — ensure control group includes AMA holdout, then re-seed to measure Dashboard performance (not combined AMA impact)'],
+     groups:[{name:'Typing Prompt Bar',pct:6.3}]},
     {id:72082,name:'AMA Holdout',type:'Long-Term Holdout',start:'2026-03-11',end:null,ao:false,allocOnly:true,
      goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
      tools:[],toolSubNote:null,notes:[],
      groups:[{name:'Control',pct:6.25}]},
-    {id:720784,name:'AMA Holdout #2',type:'Long-Term Holdout',start:'2026-04-23',end:null,ao:false,allocOnly:true,
+    {id:73738,name:'AMA Holdout #2',type:'Long-Term Holdout',start:'2026-04-23',end:null,ao:false,allocOnly:true,
      goal:'Second holdout for sitewide AMA reads after Dashboard ramp to default',kpi:'N/A',
      tools:[],toolSubNote:null,notes:[],
      groups:[{name:'Control #2',pct:6.25}]}
@@ -304,7 +309,7 @@ var d123={id:123,label:'123 - Long-Term Analysis',layers:[
      goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
      tools:[],toolSubNote:null,notes:[],
      groups:[{name:'Control',pct:6.25}]},
-    {id:720784,name:'AMA Holdout #2',type:'Long-Term Holdout',start:'2026-04-23',end:null,ao:false,allocOnly:true,
+    {id:73738,name:'AMA Holdout #2',type:'Long-Term Holdout',start:'2026-04-23',end:null,ao:false,allocOnly:true,
      goal:'Second holdout for sitewide AMA reads after Dashboard ramp to default',kpi:'N/A',
      tools:[],toolSubNote:null,notes:[],
      groups:[{name:'Control #2',pct:6.25}]}
@@ -313,7 +318,7 @@ var d123={id:123,label:'123 - Long-Term Analysis',layers:[
 
 var d124={id:124,label:'124 - Experimentation',layers:[
   {id:'40734',label:'Layer 40734',tests:[
-    {id:72086,name:'Dashboard Prompt Bar',type:'Multivariate A/B',start:'2026-03-11',end:'2026-04-16',ao:false,
+    {id:72086,name:'Dashboard Prompt Bar Initial Test',type:'Multivariate A/B',start:'2026-03-11',end:'2026-04-16',ao:false,
      goal:'Determine winning prompt bar variant; measure AMA impact on dashboard',
      kpi:'Sitewide metrics (dashboard only), surface retention, CTR, AMA chat performance (incl. retention)',
      tools:['txns_tool loaded'],toolSubNote:null,
@@ -324,7 +329,15 @@ var d124={id:124,label:'124 - Experimentation',layers:[
        {label:'Click vs Type Read',date:'2026-04-13',url:SLIDES_BASE+'p21'}
      ]}
   ]},
-  {id:'NEW-CH-TEST',label:'New Layer A - AMA Credit History Tool',tests:[
+  {id:'TBD-DASH2',label:'New Layer A - AMA Dashboard Typing Prompt Bar 2',tests:[
+    {id:720782,name:'AMA Dashboard Typing Prompt Bar 2',type:'Multivariate A/B',start:'2026-04-21',end:'2026-05-20',ao:true,noRamp:false,
+     goal:'Ramp AMA prompt bar to default slowly while monitoring impact at each step',
+     kpi:'Sitewide metrics (revenue, engagement), CTR, AMA chat performance (incl. retention)',
+     tools:[],toolSubNote:null,
+     notes:['Launches 4/21 alongside Domain 123 ramp step; combined sitewide = 50%','50/50 split: Typing Prompt Bar vs Control (no holdout in domain 124)','Layer TBD'],
+     groups:[{name:'Typing Prompt Bar',pct:50},{name:'Control',pct:50}]}
+  ]},
+  {id:'NEW-CH-TEST',label:'New Layer B - AMA Credit History Tool',tests:[
     {id:88005,name:'AMA Credit History Tool',type:'Data Collection',start:'2026-04-23',end:'2026-04-30',ao:false,
      goal:'Ensure value of Credit History tool on Dashboard AMA',
      kpi:'Chat log review, positive feedback rate, prompts per session',
@@ -332,7 +345,7 @@ var d124={id:124,label:'124 - Experimentation',layers:[
      notes:['All Credit Tab Test users will have Credit History during this testing window — and after ramping to default, all users will have it','If a direct comparison against no Credit History is needed, we can sample non-holdout users from the 123 domain as a control'],
      groups:[{name:'Credit History ON',pct:100}]}
   ]},
-  {id:'NEW-CT-TEST',label:'New Layer B - AMA Credit Tab Test',tests:[
+  {id:'NEW-CT-TEST',label:'New Layer C - AMA Credit Tab Test',tests:[
     {id:88002,name:'AMA Credit Tab Test',type:'Multivariate A/B',start:'2026-04-23',end:'2026-05-28',ao:false,
      goal:'Determine if new entry points are comparable to champion; assess impact of all 5 combined',
      kpi:'Sitewide read (revenue, engagement), CTR, chat performance (incl. retention)',
@@ -344,7 +357,7 @@ var d124={id:124,label:'124 - Experimentation',layers:[
        {name:'Prompt bar',pct:16.6},{name:'Banner + SWC + Sparkles + Prompt bar',pct:16.6}
      ]}
   ]},
-  {id:'TBD-A',label:'New Layer C - AMA Chat History',tests:[
+  {id:'TBD-A',label:'New Layer D - AMA Chat History',tests:[
     {id:88001,name:'AMA Chat History Test',type:'Multivariate A/B',start:'2026-04-28',end:'2026-05-28',ao:false,
      goal:'Evaluate usage and feasibility of chat history feature',
      kpi:'CTR, chat performance (incl. weekly AMA retention)',
@@ -352,7 +365,7 @@ var d124={id:124,label:'124 - Experimentation',layers:[
      notes:['Caution: if tools tested here are not ramped to default after closing, users cannot continue those chats'],
      groups:[{name:'Chat History ON',pct:50},{name:'Control',pct:50}]}
   ]},
-  {id:'TBD-B',label:'New Layer D - Spending Insights Re-Route to AMA',tests:[
+  {id:'TBD-B',label:'New Layer E - Spending Insights Re-Route to AMA',tests:[
     {id:88003,name:'Spending Insights Re-Route to AMA',type:'Multivariate A/B',start:'2026-04-30',end:'2026-06-30',ao:false,
      goal:'Determine winning variant of spending insights re-routing to AMA',
      kpi:'CTR, M1 surface retention (cash flow tab and generated insights), chat performance',
@@ -360,7 +373,7 @@ var d124={id:124,label:'124 - Experimentation',layers:[
      notes:['Requires sign-off from FM team before launch','Close Cash Flow Static Banner data collection when this starts','Will use AMA holdout as control group'],
      groups:[{name:'Spending Insights → AMA With Header',pct:50},{name:'Spending Insights → AMA Without Header',pct:50}]}
   ]},
-  {id:'TBD-C',label:'New Layer E - AMA PL Tool Test (TBD)',tests:[
+  {id:'TBD-C',label:'New Layer F - AMA PL Tool Test (TBD)',tests:[
     {id:88004,name:'AMA PL Tool Test',type:'Multivariate A/B',start:'2026-06-01',end:null,ao:false,
      goal:'Test PL tool in AMA via active experiment entry points (or new entry point if needed)',
      kpi:'Chat performance (incl. weekly AMA retention)',
@@ -407,9 +420,10 @@ function buildTimeline(domId,cid){
       for(var gi=0;gi<t.groups.length;gi++){totalPct+=t.groups[gi].pct;if(!isCtrl(t.groups[gi].name))ncPct+=t.groups[gi].pct;}
       var cur=curRampPhase(t);
       var isHoldout=t.type==='Long-Term Holdout';
-      var swTxt=t.ao?(cur?cur.swPct+'% sw':'0% sw - not yet ramped'):(isHoldout?swPct(domId,totalPct)+'% sw':swPct(domId,ncPct)+'% sw');
+      var futureRamp=getRamp(t);var futureMax=futureRamp.length?futureRamp[futureRamp.length-1]:null;
+      var swTxt=t.ao?(cur?cur.swPct+'% sw':(futureMax?futureMax.swPct+'% sw':'0% sw - not yet ramped')):(isHoldout?swPct(domId,totalPct)+'% sw':swPct(domId,ncPct)+'% sw');
       var swColor=t.ao&&cur?'#3b6d11':t.ao?'#888780':'#1a1a18';
-      var barColor=t.ao?(cur?cur.fill:'#d4edc0'):(COLORS[t.id]||'#d3d1c7');
+      var barColor=(isDashAO(t.id)||isDash2(t.id))?'#fac775':t.ao?(cur?cur.fill:'#d4edc0'):(COLORS[t.id]||'#d3d1c7');
 
 
       var row=document.createElement('div');row.className='tl-row';
@@ -433,7 +447,7 @@ function buildTimeline(domId,cid){
         }
       }
       var showPin=(t.ao&&t.id!==72082)||domId===124;
-      if(showPin&&t.id!==72086&&t.id!==720784){
+      if(showPin&&t.id!==72086&&t.id!==73738){
         var pin=document.createElement('div');
         pin.className='tl-tip';
         pin.style.cssText='left:'+toPos(PIN_DATE)+'%;top:-2px;font-size:11px;transform:translateX(-50%);line-height:1;';
@@ -445,7 +459,7 @@ function buildTimeline(domId,cid){
         var dpin=document.createElement('div');
         dpin.className='tl-tip';
         dpin.style.cssText='left:'+toPos(DASH_DEFAULT_PIN)+'%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;';
-        dpin.innerHTML='<div style="width:8px;height:8px;background:#3b6d11;border:1.5px solid #fff;border-radius:2px;transform:rotate(45deg);position:absolute;top:50%;left:50%;margin:-4px 0 0 -4px;"></div><span class="tl-tip-label">Dashboard Typing ramped to default 4/23 (90% sw)</span>';
+        dpin.innerHTML='<div style="width:8px;height:8px;background:#3b6d11;border:1.5px solid #fff;border-radius:2px;transform:rotate(45deg);position:absolute;top:50%;left:50%;margin:-4px 0 0 -4px;"></div><span class="tl-tip-label">Dashboard Typing ramped to default ~5/20 (90% sw)</span>';
         track.appendChild(dpin);
       }
       if(t.test_reads&&t.test_reads.length){
@@ -527,7 +541,7 @@ function buildAlloc(domId,cid){
     var allGroups=[];
     for(var ti=0;ti<layer.tests.length;ti++){var t=layer.tests[ti];for(var gi=0;gi<t.groups.length;gi++)allGroups.push({t:t,g:t.groups[gi],gi:gi});}
     var useFixed=FIXED_OFFSETS[layer.id]!==undefined;
-    if(!useFixed)allGroups.sort(function(a,b){return(isCtrl(a.g.name)?0:1)-(isCtrl(b.g.name)?0:1);});
+    if(!useFixed)allGroups.sort(function(a,b){return(isCtrl(b.g.name)?0:1)-(isCtrl(a.g.name)?0:1);});
     var cursor=0,groupDefs=[];
     for(var agi=0;agi<allGroups.length;agi++){groupDefs.push({t:allGroups[agi].t,g:allGroups[agi].g,gi:allGroups[agi].gi,offset:cursor});cursor+=allGroups[agi].g.pct;}
 
@@ -536,7 +550,7 @@ function buildAlloc(domId,cid){
       var def=groupDefs[di],t=def.t,g=def.g,gi=def.gi,offset=def.offset;
       var ctrl=isCtrl(g.name),shades=AB_SHADES[t.id];
       var fill=ctrl?COLORS.ctrl:(shades?(shades[gi]||shades[shades.length-1]):(COLORS[t.id]||'#d3d1c7'));
-      if(t.ao){
+      if(t.ao&&!(useFixed&&FIXED_OFFSETS[layer.id]&&FIXED_OFFSETS[layer.id][g.name]&&!FIXED_OFFSETS[layer.id][g.name].ao)){
         var ramp=getRamp(t),sd=parseDate(t.start),ed=t.end?parseDate(t.end):RE;
         // Calculate stack offset for AO tests in same layer
         var aoBaseH=0;
@@ -551,13 +565,14 @@ function buildAlloc(domId,cid){
         for(var ri=0;ri<ramp.length;ri++){
           var ph=ramp[ri],ps=parseDate(ph.start),pe=parseDate(ph.end);
           var ss=ps<sd?sd:ps,se=pe>ed?ed:pe;if(se<=ss)continue;
-          var lp=domId===123?(ph.swPct/80*100):(ph.swPct/20*100);
+          var lp=domId===123?((ph.d123LayerPct!==undefined)?ph.d123LayerPct:(ph.swPct/80*100)):((ph.d124LayerPct!==undefined)?ph.d124LayerPct:(ph.swPct/20*100));
           var stackLp=0;
           if(ctPhase){var ctp=ctPhase(ss);if(ctp)stackLp=domId===123?(ctp.swPct/80*100):(ctp.swPct/20*100);}
           validSegs.push({ph:ph,ss:ss,se:se,lp:lp,stackLp:stackLp});
         }
-        // Use SVG staircase for Dashboard AO (id 720781) to avoid thin-bar problem
-        if(t.id===720781&&validSegs.length>0){
+        // Use SVG staircase for Dashboard AO (ids 720781/720782) to avoid thin-bar problem
+        var dashStackBase=(useFixed&&FIXED_OFFSETS[layer.id]&&FIXED_OFFSETS[layer.id][g.name]&&FIXED_OFFSETS[layer.id][g.name].topOffset!==undefined)?FIXED_OFFSETS[layer.id][g.name].topOffset:0;
+        if(isDashAO(t.id)&&!isCtrl(g.name)&&validSegs.length>0){
           // Draw filled staircase area using SVG
           var svgNS='http://www.w3.org/2000/svg';
           var svgEl=document.createElementNS(svgNS,'svg');
@@ -570,48 +585,41 @@ function buildAlloc(domId,cid){
             var x1pct=toPos(vs.ss),x2pct=(si+1<totalSteps)?toPos(validSegs[si+1].ss):Math.min(toPos(vs.se),100);
             var segW=Math.max(x2pct-x1pct,0.5);
             var totalLp2=vs.lp+vs.stackLp;
-            var segH2=Math.min(vs.lp/100*CHART_H,CHART_H),segTop2=CHART_H-Math.min(totalLp2/100*CHART_H,CHART_H);
+            var baseOffPx=(dashStackBase/100)*CHART_H;
+            var segH2=Math.min(vs.lp/100*CHART_H,CHART_H-baseOffPx),segTop2=CHART_H-baseOffPx-Math.min(totalLp2/100*CHART_H,CHART_H-baseOffPx);
             var rect=document.createElementNS(svgNS,'rect');
             rect.setAttribute('x',x1pct+'%');rect.setAttribute('y',segTop2+'px');
             rect.setAttribute('width',segW+'%');rect.setAttribute('height',segH2+'px');
-            rect.setAttribute('fill',vs.ph.fill);
+            var dashFills=['#fde4b0','#fac775','#e09040']; // light→mid→dark yellow for 10%→50%
+            rect.setAttribute('fill',dashFills[Math.min(si,dashFills.length-1)]);
             rect.innerHTML='<title>'+g.name+' - '+vs.ph.swPct+'% sitewide</title>';
             svgEl.appendChild(rect);
             // Vertical step line at transition (not last)
             if(si+1<totalSteps){
               var vs2=validSegs[si+1];
               var nextLp=vs2.lp+vs2.stackLp;
-              var nextTop=CHART_H-Math.min(nextLp/100*CHART_H,CHART_H);
+              var nextTop=CHART_H-baseOffPx-Math.min(nextLp/100*CHART_H,CHART_H-baseOffPx);
               var line=document.createElementNS(svgNS,'line');
               line.setAttribute('x1',x2pct+'%');line.setAttribute('y1',segTop2+'px');
               line.setAttribute('x2',x2pct+'%');line.setAttribute('y2',nextTop+'px');
-              line.setAttribute('stroke','#3b6d11');line.setAttribute('stroke-width','1.5');
+              line.setAttribute('stroke','#e09040');line.setAttribute('stroke-width','1.5');
               svgEl.appendChild(line);
             }
           }
           canvas.appendChild(svgEl);
           // Add step labels — place each label to the LEFT of its step start, staggered vertically
           // so they don't overlap when steps are very close together horizontally
-          var labelOffsets=[0,-22,-44]; // vertical offsets to stagger
           for(var si2=0;si2<totalSteps;si2++){
             var vs3=validSegs[si2];
-            var xLblPct=toPos(vs3.ss);
+            var x1pct3=toPos(vs3.ss),x2pct3=(si2+1<totalSteps)?toPos(validSegs[si2+1].ss):Math.min(toPos(vs3.se),100);
+            var segMidX=(x1pct3+x2pct3)/2;
             var totalLp3=vs3.lp+vs3.stackLp;
-            var segTop3=CHART_H-Math.min(totalLp3/100*CHART_H,CHART_H);
-            var vOffset=labelOffsets[si2]||0;
-            var ann2=document.createElement('div');
-            ann2.style.cssText='position:absolute;left:'+xLblPct+'%;top:'+(segTop3-16+vOffset)+'px;font-size:9px;font-weight:700;color:#3b6d11;white-space:nowrap;transform:translateX(-50%);z-index:6;pointer-events:none;padding:1px 4px;border-radius:3px;line-height:1.4;border:1px solid #97c459;background:#f0fbe6;';
-            ann2.textContent=vs3.ph.swPct+'% sw';
-            canvas.appendChild(ann2);
-            // connector line from label to step
-            if(vOffset!==0){
-              var conn=document.createElementNS('http://www.w3.org/2000/svg','svg');
-              conn.style.cssText='position:absolute;left:0;top:0;width:100%;height:'+CHART_H+'px;overflow:visible;pointer-events:none;z-index:3;';
-              var cl=document.createElementNS('http://www.w3.org/2000/svg','line');
-              cl.setAttribute('x1',xLblPct+'%');cl.setAttribute('y1',(segTop3-16+vOffset+9)+'px');
-              cl.setAttribute('x2',xLblPct+'%');cl.setAttribute('y2',(segTop3-2)+'px');
-              cl.setAttribute('stroke','#97c459');cl.setAttribute('stroke-width','1');cl.setAttribute('stroke-dasharray','2,2');
-              conn.appendChild(cl);canvas.appendChild(conn);
+            var segH3=Math.min(vs3.lp/100*CHART_H,CHART_H-baseOffPx),segTop3=CHART_H-baseOffPx-Math.min(totalLp3/100*CHART_H,CHART_H-baseOffPx);
+            if(segH3>10){
+              var ann2=document.createElement('div');
+              ann2.style.cssText='position:absolute;left:'+segMidX+'%;top:'+(segTop3+2)+'px;font-size:8px;font-weight:500;white-space:nowrap;transform:translateX(-50%);z-index:6;pointer-events:none;color:rgba(0,0,0,.45);';
+              ann2.textContent=Math.round(vs3.lp*(domId===123?0.80:0.20))+'%';
+              canvas.appendChild(ann2);
             }
           }
         } else {
@@ -622,13 +630,22 @@ function buildAlloc(domId,cid){
             var totalLp4=vs4.lp+vs4.stackLp;
             var segH4=Math.min(vs4.lp/100*CHART_H,CHART_H),segTop4=CHART_H-Math.min(totalLp4/100*CHART_H,CHART_H);
             var seg=document.createElement('div');seg.className='alloc-vseg';
-            seg.style.cssText='left:'+segSp+'%;width:'+segWp+'%;top:'+segTop4+'px;height:'+segH4+'px;background:'+vs4.ph.fill+';color:'+vs4.ph.text+';';
+            var seg4fill=(isDashAO(t.id)&&isCtrl(g.name))?'#e8e6de':vs4.ph.fill;
+            var seg4text=(isDashAO(t.id)&&isCtrl(g.name))?'#555':vs4.ph.text;
+            seg.style.cssText='left:'+segSp+'%;width:'+segWp+'%;top:'+segTop4+'px;height:'+segH4+'px;background:'+seg4fill+';color:'+seg4text+';';
             seg.title=g.name+' - '+vs4.ph.swPct+'% sitewide';if(segWp>=2&&segH4>12)seg.textContent=vs4.ph.label;
             canvas.appendChild(seg);
           }
         }
-        var curSw=curRampPhase(t)?curRampPhase(t).swPct+'% sw':'0% sw';
-        legItems.push({name:g.name,fill:curRampPhase(t)?curRampPhase(t).fill:'#d4edc0',sw:curSw,testId:t.id});
+        var curPhaseForSw=curRampPhase(t);
+        var curSw;
+        if(isDashAO(t.id)&&curPhaseForSw){
+          var lp4sw=domId===123?((curPhaseForSw.d123LayerPct!==undefined)?curPhaseForSw.d123LayerPct:(curPhaseForSw.swPct/80*100)):((curPhaseForSw.d124LayerPct!==undefined)?curPhaseForSw.d124LayerPct:(curPhaseForSw.swPct/20*100));
+          curSw=Math.round(lp4sw*(domId===123?0.80:0.20))+'%';
+        } else {
+          curSw=curPhaseForSw?curPhaseForSw.swPct+'%':'0%';
+        }
+        legItems.push({name:g.name,fill:(isDashAO(t.id)&&!isCtrl(g.name))?'#fac775':(isDashAO(t.id)&&isCtrl(g.name))?'#e8e6de':(curRampPhase(t)?curRampPhase(t).fill:'#d4edc0'),sw:curSw,testId:t.id});
       } else if(useFixed&&FIXED_OFFSETS[layer.id]&&FIXED_OFFSETS[layer.id][g.name]){
         var fo=FIXED_OFFSETS[layer.id][g.name];
         var sp2=toPos(t.start),ep2=t.end?toPos(t.end):100,wp2=Math.max(ep2-sp2,0.3);
@@ -637,7 +654,7 @@ function buildAlloc(domId,cid){
         seg2.style.cssText='left:'+sp2+'%;width:'+wp2+'%;top:'+yTop2+'px;height:'+yH2+'px;background:'+fill+';position:absolute;';
         var swLbl2=swPct(domId,fo.fixedPct)+'%';seg2.title=g.name+' - '+swLbl2+' sitewide';
         if(yH2>8&&wp2>5){var sl=document.createElement('span');sl.style.cssText='position:absolute;top:2px;left:0;right:0;text-align:center;font-size:8px;font-weight:500;color:rgba(0,0,0,.5);pointer-events:none;';sl.textContent=swLbl2;seg2.appendChild(sl);}
-        canvas.appendChild(seg2);legItems.push({name:g.name,fill:fill,sw:swLbl2+' sw',testId:t.id});
+        canvas.appendChild(seg2);legItems.push({name:g.name,fill:fill,sw:swLbl2,testId:t.id});
       } else {
         var sp3=toPos(t.start),ep3=t.end?toPos(t.end):100,wp3=Math.max(ep3-sp3,0.3);
         var yTop3=(1-(offset+g.pct)/100)*CHART_H,yH3=(g.pct/100)*CHART_H;
@@ -645,7 +662,7 @@ function buildAlloc(domId,cid){
         seg3.style.cssText='left:'+sp3+'%;width:'+wp3+'%;top:'+yTop3+'px;height:'+yH3+'px;background:'+fill+';';
         var swLbl3=swPct(domId,g.pct)+'%';seg3.title=g.name+' - '+swLbl3+' sitewide';
         if(yH3>10&&wp3>5)seg3.textContent=swLbl3;
-        canvas.appendChild(seg3);legItems.push({name:g.name,fill:fill,sw:swLbl3+' sw',testId:t.id});
+        canvas.appendChild(seg3);legItems.push({name:g.name,fill:fill,sw:swLbl3,testId:t.id});
       }
     }
 
@@ -664,8 +681,8 @@ function buildAlloc(domId,cid){
     lb.appendChild(legEl);
 
     var layerNotes=[];
-    if(layer.id==='40569d1')layerNotes.push({t:'ACCELERATED: Dashboard ramp 10% \u2192 25% \u2192 50% sitewide, then ramp to default on 4/23 (90% sw with two 5% holdouts)'});
-    if(layer.id==='40569d1')layerNotes.push({t:'Same population as Layer 40569 — duplicate layer for independent Dashboard AO ramp'});
+    if(layer.id==='40569d1')layerNotes.push({t:'ACCELERATED: Dashboard ramp 10% \u2192 50% sitewide (hold 4 weeks), then ramp to default ~5/20 (90% sw with two 5% holdouts)'});
+    if(layer.id==='40569d1')layerNotes.push({t:'Dup of Layer 40569 — ensure control group includes AMA holdout, then re-seed to measure Dashboard performance (not combined AMA impact)'});
     if(layer.id==='NEW-CT-TEST')layerNotes.push({t:'Credit History tool loaded by proxy — Credit History Tool Test (Layer A) covers entire domain 124'});
     if(layer.id==='40569d2')layerNotes.push({t:'Same population as Layer 40569 — duplicate layer for independent Cash Flow Tab AO ramp'});
     if(layerNotes.length){
