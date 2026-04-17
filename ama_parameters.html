@@ -138,12 +138,17 @@ function renderTable() {
       // 4: Entry Point
       var td4 = document.createElement('td'); td4.textContent = p.entry_point||'—'; tr.appendChild(td4);
 
-      // 5: Experiments (condensed — one block per experiment)
+      // 5: Experiments (condensed — only experiments with at least one non-default variation)
       var td5 = document.createElement('td');
-      if (p.experiments && p.experiments.length) {
+      var nonDefaultExps = (p.experiments||[]).filter(function(e){
+        return e.variations.some(function(v){ return !v.is_default; });
+      });
+      if (nonDefaultExps.length) {
         var frag = document.createDocumentFragment();
-        for (var j = 0; j < p.experiments.length; j++) {
-          var exp = p.experiments[j];
+        for (var j = 0; j < nonDefaultExps.length; j++) {
+          var exp = nonDefaultExps[j];
+          // Only show non-default variations within each experiment
+          exp = Object.assign({}, exp, { variations: exp.variations.filter(function(v){ return !v.is_default; }) });
           var block = document.createElement('div');
           block.className = 'exp-block ' + (exp.experiment_status === 'Running' ? 'running' : 'closed');
           // Header: experiment name (linked) + status pill
@@ -217,7 +222,7 @@ function sortTable(col) {
   PARAMS.sort(function(a,b) {
     var va = a[keys[col]], vb = b[keys[col]];
     if (va == null) va=''; if (vb == null) vb='';
-    if (col === 5) { va=(a.experiments||[]).length; vb=(b.experiments||[]).length; }
+    if (col === 5) { va=(a.experiments||[]).filter(function(e){return e.variations.some(function(v){return !v.is_default;});}).length; vb=(b.experiments||[]).filter(function(e){return e.variations.some(function(v){return !v.is_default;});}).length; }
     if (typeof va==='string') va=va.toLowerCase();
     if (typeof vb==='string') vb=vb.toLowerCase();
     if (va<vb) return sortAsc?-1:1;
