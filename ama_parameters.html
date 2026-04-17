@@ -21,10 +21,15 @@ thead th.sorted-asc .sort-arrow::after{content:'\25B2';}
 thead th.sorted-desc .sort-arrow::after{content:'\25BC';}
 tbody td{padding:5px 8px;border-bottom:1px solid #f4f3ef;vertical-align:top;}
 tbody tr:hover{background:#f9f8f5;}
+tbody tr.category-header:hover{background:#e8e6de;}
+.category-header td{background:#e8e6de;font-weight:600;font-size:11px;color:#5f5e5a;padding:8px;letter-spacing:.02em;}
 .pill{display:inline-block;border-radius:3px;font-size:9px;padding:1px 5px;font-weight:500;white-space:nowrap;}
+.pill-exp{background:#dde8f5;color:#1a4a7a;margin:1px 0;}
+.pill-status-running{background:#e1f5ee;color:#0f6e56;}
+.pill-status-closed{background:#f4f3ef;color:#888780;}
+.pill-type{background:#f3e8ff;color:#6b21a8;}
 .pill-yes{background:#e1f5ee;color:#0f6e56;}
 .pill-no{background:#f4f3ef;color:#888780;}
-.pill-exp{background:#dde8f5;color:#1a4a7a;margin:1px 0;}
 .override-list{list-style:none;padding:0;margin:0;}
 .override-list li{margin-bottom:2px;}
 .override-val{font-family:monospace;font-size:10px;color:#633806;background:#faeeda;padding:0 3px;border-radius:2px;}
@@ -51,18 +56,16 @@ a.darwin-link:hover{text-decoration:underline;}
       <th onclick="sortTable(0)">Parameter ID <span class="sort-arrow"></span></th>
       <th onclick="sortTable(1)">Parameter Name <span class="sort-arrow"></span></th>
       <th onclick="sortTable(2)">Default Value <span class="sort-arrow"></span></th>
-      <th onclick="sortTable(3)">Default Tested <span class="sort-arrow"></span></th>
-      <th onclick="sortTable(4)">Content Screen <span class="sort-arrow"></span></th>
-      <th onclick="sortTable(5)">Entry Point <span class="sort-arrow"></span></th>
-      <th onclick="sortTable(6)">Platform <span class="sort-arrow"></span></th>
-      <th onclick="sortTable(7)">Experiments with Non-Default Values <span class="sort-arrow"></span></th>
-      <th onclick="sortTable(8)">Is Entry Point <span class="sort-arrow"></span></th>
-      <th onclick="sortTable(9)">Is Chat Optimization <span class="sort-arrow"></span></th>
-      <th onclick="sortTable(10)">Description <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(3)">Parameter Type <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(4)">Default Tested <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(5)">Content Screen <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(6)">Entry Point <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(7)">Platform <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(8)">Experiments with Non-Default Values <span class="sort-arrow"></span></th>
+      <th onclick="sortTable(9)">Description <span class="sort-arrow"></span></th>
     </tr>
   </thead>
-  <tbody id="params-body">
-  </tbody>
+  <tbody id="params-body"></tbody>
 </table>
 
 <a class="download-btn" href="#" onclick="downloadHTML();return false;">
@@ -71,109 +74,146 @@ a.darwin-link:hover{text-decoration:underline;}
 </a>
 
 <script>
-var PARAMS = [{"parameter_id": 1003, "parameter_name": "ama.chat_history.enabled", "default_value": "false", "overrides": [], "description": null, "content_screen": null, "entry_point": null, "platform": null, "is_entry_point": null, "default_tested": null, "is_chat_optimization": null}, {"parameter_id": 1001, "parameter_name": "ama.credit_tab.enabled", "default_value": "false", "overrides": [{"experimentName": "AMA Always On: Credit Tab", "variation_name": "Champion: Credit Tab", "override_value": "true"}], "description": null, "content_screen": null, "entry_point": null, "platform": null, "is_entry_point": null, "default_tested": null, "is_chat_optimization": null}, {"parameter_id": 1002, "parameter_name": "ama.dashboard.prompt_bar.type", "default_value": "none", "overrides": [{"experimentName": "Dashboard Prompt Bar", "variation_name": "Click", "override_value": "click"}, {"experimentName": "Dashboard Prompt Bar", "variation_name": "Typing", "override_value": "typing"}], "description": null, "content_screen": null, "entry_point": null, "platform": null, "is_entry_point": null, "default_tested": null, "is_chat_optimization": null}, {"parameter_id": 1004, "parameter_name": "ama.txns_tool.loaded", "default_value": "false", "overrides": [{"experimentName": "Dashboard Prompt Bar", "variation_name": "Click", "override_value": "true"}], "description": null, "content_screen": null, "entry_point": null, "platform": null, "is_entry_point": null, "default_tested": null, "is_chat_optimization": null}];
+var CATEGORY_ORDER = ["General","Transaction Chat Optimizations","PL Optimization","History Optimizations","Chat History Optimization","Credit Tab","Dashboard Tab","Cash Flow Tab (+ transactions)","PL Marketplace (+ PL & transactions)"];
+var PARAMS = [{"parameter_id": 43606, "parameter_name": "memberExperience.ama_prompt_variation", "category": "General", "description": "Type of LLM", "default_value": "gepa_optimized", "overrides": [{"experimentName": "Enable Financial Agent Chat", "variation_name": "Entrypoint + Simplified Prompt", "override_value": "vibed", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44611, "parameter_name": "core_karma_assistant.consent_screen", "category": "General", "description": "Turns consent screen on/off", "default_value": "false", "overrides": [{"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "Control", "override_value": "true", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "Existing Consent Page", "override_value": "true", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "New Consent Page Variant 1", "override_value": "true", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "New Consent Page Variant 2", "override_value": "true", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44612, "parameter_name": "core_karma_assistant.consent_screen_cta", "category": "General", "description": "Changes CTA on Consent Screen", "default_value": "Acknowledge and continue", "overrides": [{"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "New Consent Page Variant 1", "override_value": "Continue to your personalized insights", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "New Consent Page Variant 2", "override_value": "Acknowledge and continue to your personalized insights", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44925, "parameter_name": "core_karma_assistant.new_consent_copy", "category": "General", "description": "Changes Copy on Consent Screen", "default_value": "false", "overrides": [{"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "New Consent Page Variant 1", "override_value": "true", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "New Consent Page Variant 2", "override_value": "true", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44873, "parameter_name": "iosConfig.memexPromptBar.enabled", "category": "General", "description": "Turns on Prompt Bar (Credit + Dashboard) on iOS only", "default_value": "false", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45397, "parameter_name": "androidConfig.memexPromptBarKillSwitch.enabled", "category": "General", "description": "Turns on Prompt Bar (Credit + Dashboard) on Android only", "default_value": "false", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45027, "parameter_name": "memberExperience.ama_spanner_memory_checkpointer_enabled", "category": "Transaction Chat Optimizations", "description": null, "default_value": "true", "overrides": [{"experimentName": "AMA Data Collection: Cash Flow Static Banner", "variation_name": "Control", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Control", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Control", "override_value": "false", "experiment_status": "Closed"}, {"experimentName": "PL AMA Entrypoint Phase 0", "variation_name": "Control", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Control", "override_value": "false", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately", "override_value": "false", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry", "override_value": "false", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44216, "parameter_name": "memberExperience.ama_txn_aggregates_enabled", "category": "Transaction Chat Optimizations", "description": null, "default_value": "true", "overrides": [{"experimentName": "AMA Data Collection: Cash Flow Static Banner", "variation_name": "Control", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Control", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Control", "override_value": "false", "experiment_status": "Closed"}, {"experimentName": "PL AMA Entrypoint Phase 0", "variation_name": "Control", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "PL AMA Entrypoint Phase 0", "variation_name": "pl_entrypoint", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Control", "override_value": "false", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately", "override_value": "false", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Control", "override_value": "false", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry", "override_value": "false", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44213, "parameter_name": "memberExperience.ama_raw_txn_enabled", "category": "Transaction Chat Optimizations", "description": null, "default_value": "true", "overrides": [{"experimentName": "AMA Data Collection: Cash Flow Static Banner", "variation_name": "Control", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Control", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Control", "override_value": "false", "experiment_status": "Closed"}, {"experimentName": "PL AMA Entrypoint Phase 0", "variation_name": "Control", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "PL AMA Entrypoint Phase 0", "variation_name": "pl_entrypoint", "override_value": "false", "experiment_status": "Running"}, {"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Control", "override_value": "false", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately", "override_value": "false", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Control", "override_value": "false", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry", "override_value": "false", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44345, "parameter_name": "memberExperience.enable_pl_offer_tool", "category": "PL Optimization", "description": "turns on the PL tool", "default_value": "false", "overrides": [{"experimentName": "PL AMA Entrypoint Phase 0", "variation_name": "pl_entrypoint", "override_value": "true", "experiment_status": "Running"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44022, "parameter_name": "memberExperience.ama_credit_history_enabled", "category": "History Optimizations", "description": "enables the creditHistory feature in backend so the agent has access to this feature", "default_value": "false", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": null, "parameter_name": "memberExperience.ama_txn_history_enabled", "category": "History Optimizations", "description": null, "default_value": null, "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45969, "parameter_name": "core_karma_assistant.conversation_history_enabled", "category": "Chat History Optimization", "description": "Clock icon - opens archived chats (and can restart them)", "default_value": "false", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 43014, "parameter_name": "core_karma_assistant.ama_enabled", "category": "Credit Tab", "description": "Turns on Credit Tab Static Banner", "default_value": "DISABLED", "overrides": [{"experimentName": "AMA Always On: Credit Tab", "variation_name": "Champion: Credit Tab", "override_value": "ENABLED", "experiment_status": "Running"}, {"experimentName": "Enable Financial Agent Chat", "variation_name": "Entrypoint + Simplified Prompt", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Enable Financial Agent Chat", "variation_name": "Entrypoint + Traditional Prompt", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "Existing Consent Page", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "New Consent Page Variant 1", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "New Consent Page Variant 2", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "No Consent Page", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 1", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 2", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 3", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 4", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 5", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 6 (existing copy)", "override_value": "ENABLED", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 43015, "parameter_name": "core_karma_assistant.ama_entrypoint_heading", "category": "Credit Tab", "description": "Credit Tab Static Banner Heading", "default_value": "See what's really affecting your credit", "overrides": [{"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "Control", "override_value": "Have questions about your credit?", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "Existing Consent Page", "override_value": "See what\u2019s really affecting your credit", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "New Consent Page Variant 1", "override_value": "See what\u2019s really affecting your credit", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "New Consent Page Variant 2", "override_value": "See what\u2019s really affecting your credit", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "No Consent Page", "override_value": "See what\u2019s really affecting your credit", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 1", "override_value": "Stay ahead of your credit changes", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 2", "override_value": "Understand your credit score in seconds", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 3", "override_value": "See what\u2019s really affecting your credit", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 4", "override_value": "Want help improving your credit?", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 5", "override_value": "Confused about your credit score?", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 6 (existing copy)", "override_value": "Have questions about your credit?", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "Control", "override_value": "Have questions about your credit?", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 43016, "parameter_name": "core_karma_assistant.ama_entrypoint_body", "category": "Credit Tab", "description": "Credit Tab Static Banner Body", "default_value": "Get instant insights from our AI Assistant", "overrides": [{"experimentName": "Financial Agent AMA Chat Consent Page Test", "variation_name": "Control", "override_value": "Chat with Intuit Assist", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 1", "override_value": "Ask our AI Assistant how to strengthen your score", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 2", "override_value": "Ask our AI Assistant to break it down for you", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 4", "override_value": "Get personalized guidance from our AI Assistant", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 5", "override_value": "Ask our AI Assistant to explain what\u2019s going on", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "AMA Enabled + Entrypoint Variation 6 (existing copy)", "override_value": "Chat with Intuit Assist", "experiment_status": "Closed"}, {"experimentName": "Financial Agent AMA Chat Entrypoint Test", "variation_name": "Control", "override_value": "Chat with Intuit Assist", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44909, "parameter_name": "iosConfig.memexPromptBar.value", "category": "Credit Tab", "description": "specifies variant for iOS Prompt bar", "default_value": "control", "overrides": [{"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Click Sends Immediately", "override_value": "click", "experiment_status": "Closed"}, {"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Typing Sends Entry", "override_value": "typing", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44874, "parameter_name": "iosConfig.memexPromptBar.appVersion.min", "category": "Credit Tab", "description": "Min App Version for iOS Prompt Bar", "default_value": "26.6", "overrides": [{"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Click Sends Immediately", "override_value": "26.8", "experiment_status": "Closed"}, {"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Control", "override_value": "26.8", "experiment_status": "Closed"}, {"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Typing Sends Entry", "override_value": "26.8", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44875, "parameter_name": "iosConfig.memexPromptBar.appVersion.max", "category": "Credit Tab", "description": "Max App Version for iOS Prompt Bar", "default_value": "9999.9.9", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45015, "parameter_name": "androidConfig.memexPromptBar.value", "category": "Credit Tab", "description": "specifies variant for Android Prompt bar", "default_value": "control", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45016, "parameter_name": "androidConfig.memexPromptBar.appVersion.min", "category": "Credit Tab", "description": "Min App Version for Android Prompt Bar", "default_value": "26.13", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45017, "parameter_name": "androidConfig.memexPromptBar.appVersion.max", "category": "Credit Tab", "description": "Max App Version for Android Prompt Bar", "default_value": "9999.9.9", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45739, "parameter_name": "core_karma_assistant.ama_credit_see_whats_changed_entry_point", "category": "Credit Tab", "description": "Re-routes the See What's Changed Button to AMA", "default_value": "false", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45867, "parameter_name": "memberExperience.ama_credit_change_entry_enabled", "category": "Credit Tab", "description": "on/off toggle for 'See What's Changed' button re-direct to AMA chat", "default_value": "false", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45868, "parameter_name": "memberExperience.ama_creditTab_credit_change_entry_prompt", "category": "Credit Tab", "description": "the initial message/prompt sent to AMA chat", "default_value": "Why did my score change recently? Give me an overview of what happened, what is the impact, and what should I do about it?", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 46491, "parameter_name": "memberExperience.financial_advisor_credit_graph_entry_point_enabled", "category": "Credit Tab", "description": "on/off toggle for sparkle above the Credit Changes Graph", "default_value": "false", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 46506, "parameter_name": "memberExperience.financial_advisor_credit_graph_entry_point_cta_text", "category": "Credit Tab", "description": "specifies text for the sparkle above the Credit Changes graph", "default_value": "Clarify", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45086, "parameter_name": "iosConfig.memexPromptBarDashboard.value", "category": "Dashboard Tab", "description": "specifies variant for iOS Prompt bar", "default_value": "control", "overrides": [{"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately", "override_value": "click", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately + Transactions", "override_value": "click", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry", "override_value": "typing", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry + Transactions", "override_value": "typing", "experiment_status": "Running"}, {"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Click Sends Immediately", "override_value": "click", "experiment_status": "Closed"}, {"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Typing Sends Entry", "override_value": "typing", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately", "override_value": "click", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately + Transactions", "override_value": "click", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry", "override_value": "typing", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry + Transactions", "override_value": "typing", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45087, "parameter_name": "iosConfig.memexPromptBarDashboard.appVersion.min", "category": "Dashboard Tab", "description": "Min App Version for iOS Prompt Bar", "default_value": "26.7", "overrides": [{"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately", "override_value": "26.8", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately + Transactions", "override_value": "26.8", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Control", "override_value": "26.8", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry", "override_value": "26.8", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry + Transactions", "override_value": "26.8", "experiment_status": "Running"}, {"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Click Sends Immediately", "override_value": "26.8", "experiment_status": "Closed"}, {"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Control", "override_value": "26.8", "experiment_status": "Closed"}, {"experimentName": "Smoke Test: AMA Prompt Bar iOS Dash + Credit", "variation_name": "Typing Sends Entry", "override_value": "26.8", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately", "override_value": "26.8", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately + Transactions", "override_value": "26.8", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry", "override_value": "26.8", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry + Transactions", "override_value": "26.8", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45088, "parameter_name": "iosConfig.memexPromptBarDashboard.appVersion.max", "category": "Dashboard Tab", "description": "Max App Version for iOS Prompt Bar", "default_value": "9999.9.9", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45083, "parameter_name": "androidConfig.memexPromptBarDashboard.value", "category": "Dashboard Tab", "description": "specifies variant for Android Prompt bar", "default_value": "control", "overrides": [{"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately", "override_value": "click", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately + Transactions", "override_value": "click", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry", "override_value": "typing", "experiment_status": "Running"}, {"experimentName": "AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry + Transactions", "override_value": "typing", "experiment_status": "Running"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately", "override_value": "click", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Click Sends Immediately + Transactions", "override_value": "click", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry", "override_value": "typing", "experiment_status": "Closed"}, {"experimentName": "[Copy] - AMA: Dashboard Prompt Bar + Txns", "variation_name": "Typing Sends Entry + Transactions", "override_value": "typing", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45084, "parameter_name": "androidConfig.memexPromptBarDashboard.appVersion.min", "category": "Dashboard Tab", "description": "Min App Version for Android Prompt Bar", "default_value": "26.13", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45085, "parameter_name": "androidConfig.memexPromptBarDashboard.appVersion.max", "category": "Dashboard Tab", "description": "Max App Version for Android Prompt Bar", "default_value": "9999.9.9", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45255, "parameter_name": "core_karma_assistant.ama_cash_flow_entrypoint_enabled", "category": "Cash Flow Tab (+ transactions)", "description": "turns on cash flow static banner", "default_value": "DISABLED", "overrides": [{"experimentName": "AMA Data Collection: Cash Flow Static Banner", "variation_name": "Cash Flow Static Banner + Txns", "override_value": "ENABLED", "experiment_status": "Running"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 1", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 2", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 3", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 4", "override_value": "ENABLED", "experiment_status": "Closed"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 5", "override_value": "ENABLED", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44514, "parameter_name": "core_karma_assistant.ama_cash_flow_entrypoint_heading", "category": "Cash Flow Tab (+ transactions)", "description": "specifies the heading copy", "default_value": "Understand your spending in seconds", "overrides": [{"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Control", "override_value": "Stay on top of your spending", "experiment_status": "Closed"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 1", "override_value": "Stay on top of your spending", "experiment_status": "Closed"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 3", "override_value": "See what\u2019s really driving your spending", "experiment_status": "Closed"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 4", "override_value": "Want help managing your spending?", "experiment_status": "Closed"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 5", "override_value": "Confused about your spending?", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 44515, "parameter_name": "core_karma_assistant.ama_cash_flow_entrypoint_body", "category": "Cash Flow Tab (+ transactions)", "description": "specifies the body copy", "default_value": "Ask our AI Assistant to break it down for you", "overrides": [{"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Control", "override_value": "Ask our AI Assistant where your money is going", "experiment_status": "Closed"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 1", "override_value": "Ask our AI Assistant where your money is going", "experiment_status": "Closed"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 3", "override_value": "Get instant insights from our AI Assistant", "experiment_status": "Closed"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 4", "override_value": "Get personalized guidance from our AI Assistant", "experiment_status": "Closed"}, {"experimentName": "Cash Flow: AMA Static Banner Variant Test", "variation_name": "Variant 5", "override_value": "Ask our AI Assistant to explain what\u2019s going on", "experiment_status": "Closed"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45684, "parameter_name": "financial_assistant.spendingInsights_carousel_enabled", "category": "Cash Flow Tab (+ transactions)", "description": null, "default_value": "false", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 46283, "parameter_name": "financial_assistant.spendingInsights_carousel_header_enabled", "category": "Cash Flow Tab (+ transactions)", "description": null, "default_value": "false", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 46683, "parameter_name": "androidConfig.spendingInsights_carousel_header.enabled", "category": "Cash Flow Tab (+ transactions)", "description": null, "default_value": "false", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 46656, "parameter_name": "financial_assistant.spendingInsights_ama_cta_enabled", "category": "Cash Flow Tab (+ transactions)", "description": null, "default_value": "false", "overrides": [], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}, {"parameter_id": 45500, "parameter_name": "ploan.pl_ama_entry_tile_enabled", "category": "PL Marketplace (+ PL & transactions)", "description": "turns on the pl marketplace static banner", "default_value": "false", "overrides": [{"experimentName": "PL AMA Entrypoint Phase 0", "variation_name": "pl_entrypoint", "override_value": "true", "experiment_status": "Running"}], "parameter_type": null, "default_tested": null, "content_screen": null, "entry_point": null, "platform": null}];
+var tbody = document.getElementById('params-body');
 
-var tbody=document.getElementById('params-body');
+function renderTable() {
+  tbody.innerHTML = '';
+  var groups = {};
+  for (var i = 0; i < CATEGORY_ORDER.length; i++) { groups[CATEGORY_ORDER[i]] = []; }
+  for (var i = 0; i < PARAMS.length; i++) {
+    var cat = PARAMS[i].category;
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(PARAMS[i]);
+  }
+  for (var ci = 0; ci < CATEGORY_ORDER.length; ci++) {
+    var cat = CATEGORY_ORDER[ci];
+    var items = groups[cat];
+    if (!items || !items.length) continue;
+    var htr = document.createElement('tr');
+    htr.className = 'category-header';
+    htr.setAttribute('data-category', cat);
+    var htd = document.createElement('td');
+    htd.colSpan = 10;
+    htd.textContent = cat;
+    htr.appendChild(htd);
+    tbody.appendChild(htr);
+    for (var i = 0; i < items.length; i++) {
+      var p = items[i];
+      var tr = document.createElement('tr');
+      tr.setAttribute('data-search',
+        (p.parameter_name || '').toLowerCase() + ' ' +
+        (p.description || '').toLowerCase() + ' ' +
+        (p.category || '').toLowerCase() + ' ' +
+        (p.content_screen || '').toLowerCase() + ' ' +
+        (p.entry_point || '').toLowerCase() + ' ' +
+        (p.parameter_type || '').toLowerCase()
+      );
+      tr.setAttribute('data-category', cat);
 
-function yesNoPill(val){
-  if(val===true)return'<span class="pill pill-yes">yes</span>';
-  if(val===false)return'<span class="pill pill-no">no</span>';
-  return'<span class="no-data">\u2014</span>';
-}
-
-function renderTable(){
-  tbody.innerHTML='';
-  for(var i=0;i<PARAMS.length;i++){
-    var p=PARAMS[i];
-    var tr=document.createElement('tr');
-    tr.setAttribute('data-search',(p.parameter_name||'').toLowerCase()+' '+(p.description||'').toLowerCase()+' '+(p.content_screen||'').toLowerCase()+' '+(p.entry_point||'').toLowerCase());
-
-    // Parameter ID
-    var td0=document.createElement('td');
-    if(p.parameter_id){
-      td0.innerHTML='<a class="darwin-link" href="https://evolve.admin.creditkarma.com/darwin/parameters/'+p.parameter_id+'" target="_blank">'+p.parameter_id+'</a>';
-    } else {
-      td0.innerHTML='<span class="no-data">\u2014</span>';
-    }
-    tr.appendChild(td0);
-
-    // Parameter Name
-    var td1=document.createElement('td');td1.textContent=p.parameter_name||'\u2014';tr.appendChild(td1);
-
-    // Default Value
-    var td2=document.createElement('td');
-    td2.innerHTML=p.default_value!=null?'<span class="default-val">'+escHtml(String(p.default_value))+'</span>':'<span class="no-data">\u2014</span>';
-    tr.appendChild(td2);
-
-    // Default Tested
-    var td3=document.createElement('td');td3.innerHTML=yesNoPill(p.default_tested);tr.appendChild(td3);
-
-    // Content Screen
-    var td4=document.createElement('td');td4.textContent=p.content_screen||'\u2014';tr.appendChild(td4);
-
-    // Entry Point
-    var td5=document.createElement('td');td5.textContent=p.entry_point||'\u2014';tr.appendChild(td5);
-
-    // Platform
-    var td6=document.createElement('td');td6.textContent=p.platform||'\u2014';tr.appendChild(td6);
-
-    // Experiments with non-default values
-    var td7=document.createElement('td');
-    if(p.overrides&&p.overrides.length){
-      var ul=document.createElement('ul');ul.className='override-list';
-      for(var j=0;j<p.overrides.length;j++){
-        var ov=p.overrides[j];
-        var li=document.createElement('li');
-        li.innerHTML='<span class="pill pill-exp">'+escHtml(ov.experimentName)+'</span> '+escHtml(ov.variation_name)+': <span class="override-val">'+escHtml(String(ov.override_value))+'</span>';
-        ul.appendChild(li);
+      // 0: Parameter ID
+      var td0 = document.createElement('td');
+      if (p.parameter_id) {
+        td0.innerHTML = '<a class="darwin-link" href="https://evolve.admin.creditkarma.com/darwin/parameters/' + p.parameter_id + '" target="_blank">' + p.parameter_id + '</a>';
+      } else {
+        td0.innerHTML = '<span class="no-data">—</span>';
       }
-      td7.appendChild(ul);
-    } else {
-      td7.innerHTML='<span class="no-data">\u2014</span>';
+      tr.appendChild(td0);
+
+      // 1: Parameter Name
+      var td1 = document.createElement('td'); td1.textContent = p.parameter_name || '—'; tr.appendChild(td1);
+
+      // 2: Default Value
+      var td2 = document.createElement('td');
+      td2.innerHTML = p.default_value != null ? '<span class="default-val">' + escHtml(String(p.default_value)) + '</span>' : '<span class="no-data">—</span>';
+      tr.appendChild(td2);
+
+      // 3: Parameter Type
+      var td3 = document.createElement('td');
+      td3.innerHTML = p.parameter_type ? '<span class="pill pill-type">' + escHtml(p.parameter_type) + '</span>' : '<span class="no-data">—</span>';
+      tr.appendChild(td3);
+
+      // 4: Default Tested
+      var td4 = document.createElement('td'); td4.innerHTML = yesNoPill(p.default_tested); tr.appendChild(td4);
+
+      // 5: Content Screen
+      var td5 = document.createElement('td'); td5.textContent = p.content_screen || '—'; tr.appendChild(td5);
+
+      // 6: Entry Point
+      var td6 = document.createElement('td'); td6.textContent = p.entry_point || '—'; tr.appendChild(td6);
+
+      // 7: Platform
+      var td7 = document.createElement('td'); td7.textContent = p.platform || '—'; tr.appendChild(td7);
+
+      // 8: Experiments with non-default values
+      var td8 = document.createElement('td');
+      if (p.overrides && p.overrides.length) {
+        var ul = document.createElement('ul'); ul.className = 'override-list';
+        for (var j = 0; j < p.overrides.length; j++) {
+          var ov = p.overrides[j];
+          var li = document.createElement('li');
+          var sc = ov.experiment_status === 'Running' ? 'pill-status-running' : 'pill-status-closed';
+          li.innerHTML = '<span class="pill pill-exp">' + escHtml(ov.experimentName) + '</span> <span class="pill ' + sc + '">' + escHtml(ov.experiment_status) + '</span> ' + escHtml(ov.variation_name) + ': <span class="override-val">' + escHtml(String(ov.override_value)) + '</span>';
+          ul.appendChild(li);
+        }
+        td8.appendChild(ul);
+      } else {
+        td8.innerHTML = '<span class="no-data">—</span>';
+      }
+      tr.appendChild(td8);
+
+      // 9: Description
+      var td9 = document.createElement('td'); td9.textContent = p.description || '—'; tr.appendChild(td9);
+
+      tbody.appendChild(tr);
     }
-    tr.appendChild(td7);
-
-    // Is Entry Point
-    var td8=document.createElement('td');td8.innerHTML=yesNoPill(p.is_entry_point);tr.appendChild(td8);
-
-    // Is Chat Optimization
-    var td9=document.createElement('td');td9.innerHTML=yesNoPill(p.is_chat_optimization);tr.appendChild(td9);
-
-    // Description
-    var td10=document.createElement('td');td10.textContent=p.description||'\u2014';tr.appendChild(td10);
-
-    tbody.appendChild(tr);
   }
 }
 
-function escHtml(s){
-  var d=document.createElement('div');d.appendChild(document.createTextNode(s));return d.innerHTML;
+function yesNoPill(val) {
+  if (val === true) return '<span class="pill pill-yes">yes</span>';
+  if (val === false) return '<span class="pill pill-no">no</span>';
+  return '<span class="no-data">—</span>';
 }
 
-function filterTable(){
-  var q=document.getElementById('search').value.toLowerCase();
-  var rows=tbody.getElementsByTagName('tr');
-  for(var i=0;i<rows.length;i++){
-    var s=rows[i].getAttribute('data-search')||'';
-    rows[i].style.display=s.indexOf(q)>=0?'':'none';
+function escHtml(s) {
+  var d = document.createElement('div'); d.appendChild(document.createTextNode(s)); return d.innerHTML;
+}
+
+function filterTable() {
+  var q = document.getElementById('search').value.toLowerCase();
+  var rows = tbody.getElementsByTagName('tr');
+  var catVisible = {};
+  for (var i = 0; i < rows.length; i++) {
+    if (rows[i].className === 'category-header') continue;
+    var s = rows[i].getAttribute('data-search') || '';
+    var vis = s.indexOf(q) >= 0;
+    rows[i].style.display = vis ? '' : 'none';
+    if (vis) catVisible[rows[i].getAttribute('data-category')] = true;
+  }
+  for (var i = 0; i < rows.length; i++) {
+    if (rows[i].className === 'category-header') {
+      rows[i].style.display = catVisible[rows[i].getAttribute('data-category')] ? '' : 'none';
+    }
   }
 }
 
-var sortCol=-1,sortAsc=true;
-function sortTable(col){
-  var ths=document.querySelectorAll('thead th');
-  for(var i=0;i<ths.length;i++){ths[i].classList.remove('sorted-asc','sorted-desc');}
-  if(sortCol===col){sortAsc=!sortAsc;}else{sortCol=col;sortAsc=true;}
-  ths[col].classList.add(sortAsc?'sorted-asc':'sorted-desc');
-  PARAMS.sort(function(a,b){
-    var keys=['parameter_id','parameter_name','default_value','default_tested','content_screen','entry_point','platform','overrides','is_entry_point','is_chat_optimization','description'];
-    var va=a[keys[col]],vb=b[keys[col]];
-    if(va==null)va='';if(vb==null)vb='';
-    if(col===7){va=(a.overrides||[]).length;vb=(b.overrides||[]).length;}
-    if(typeof va==='string')va=va.toLowerCase();
-    if(typeof vb==='string')vb=vb.toLowerCase();
-    if(va<vb)return sortAsc?-1:1;
-    if(va>vb)return sortAsc?1:-1;
+var sortCol = -1, sortAsc = true;
+function sortTable(col) {
+  var ths = document.querySelectorAll('thead th');
+  for (var i = 0; i < ths.length; i++) { ths[i].classList.remove('sorted-asc', 'sorted-desc'); }
+  if (sortCol === col) { sortAsc = !sortAsc; } else { sortCol = col; sortAsc = true; }
+  ths[col].classList.add(sortAsc ? 'sorted-asc' : 'sorted-desc');
+  var keys = ['parameter_id','parameter_name','default_value','parameter_type','default_tested','content_screen','entry_point','platform','overrides','description'];
+  PARAMS.sort(function(a, b) {
+    var va = a[keys[col]], vb = b[keys[col]];
+    if (va == null) va = ''; if (vb == null) vb = '';
+    if (col === 8) { va = (a.overrides || []).length; vb = (b.overrides || []).length; }
+    if (typeof va === 'string') va = va.toLowerCase();
+    if (typeof vb === 'string') vb = vb.toLowerCase();
+    if (va < vb) return sortAsc ? -1 : 1;
+    if (va > vb) return sortAsc ? 1 : -1;
     return 0;
   });
   renderTable();
@@ -181,9 +221,9 @@ function sortTable(col){
 
 renderTable();
 
-function downloadHTML(){
-  var blob=new Blob(['<!DOCTYPE html>\n'+document.documentElement.outerHTML],{type:'text/html'});
-  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ama_parameters.html';a.click();URL.revokeObjectURL(a.href);
+function downloadHTML() {
+  var blob = new Blob(['<!DOCTYPE html>\n' + document.documentElement.outerHTML], {type:'text/html'});
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ama_parameters.html'; a.click(); URL.revokeObjectURL(a.href);
 }
 </script>
 </body>
