@@ -190,7 +190,7 @@ var DASH_DEFAULT_PIN = new Date(2026,4,20);
 
 var FORCE_IDS = {
   71788:{'Control':234055,'pl_entrypoint':234056},
-  72078:{'Champion: Credit Tab':234042},
+  72078:{'Champion: Credit + CF (TBD)':234042},
   72082:{'Control':234053},
   72085:{'Cash Flow + Txns':234061},
   72086:{'Click':234063,'Click + Optimization':234065,'Control':234062,'Typing':234064,'Typing + Optimization':234066},
@@ -223,7 +223,7 @@ var AB_SHADES={
   73738:['#888780']
 };
 var FIXED_OFFSETS={
-  '40569':{'Champion: Credit Tab':{fixedPct:6.3,ao:true},'Cash Flow + Txns':{fixedPct:25,topOffset:12.6},'pl_entrypoint':{fixedPct:12.5,topOffset:37.6},'Control':{fixedPct:6.25,topOffset:0},'Control #2':{fixedPct:6.25,topOffset:6.25},'Typing Prompt Bar':{fixedPct:50,topOffset:50,dashStart:'2026-04-21'},'Dashboard Control':{fixedPct:37.5,topOffset:12.5,dashStart:'2026-04-21'}},
+  '40569':{'Champion: Credit + CF (TBD)':{fixedPct:6.3,ao:true},'Cash Flow + Txns':{fixedPct:25,topOffset:12.6},'pl_entrypoint':{fixedPct:12.5,topOffset:37.6},'Control':{fixedPct:6.25,topOffset:0},'Control #2':{fixedPct:6.25,topOffset:6.25},'Typing Prompt Bar':{fixedPct:50,topOffset:50,dashStart:'2026-04-21'},'Dashboard Control':{fixedPct:37.5,topOffset:12.5,dashStart:'2026-04-21'}},
 };
 
 function parseDate(s){var p=s.split('-');return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));}
@@ -723,6 +723,7 @@ function buildAlloc(domId,cid){
 
     var layerNotes=[];
     if(layer.id==='40569')layerNotes.push({t:'ACCELERATED: Dashboard ramp 40% sw treatment (hold 4 weeks), then ramp to default ~5/20 (90% sw with two 5% holdouts)'});
+    if(layer.id==='40569')layerNotes.push({t:'Layer must be re-seeded on Mon 4/21 after closing Cash Flow Static Banner (72085) and AMA Always On: Credit + CF (72078)'});
     if(layer.id==='NEW-CT-TEST')layerNotes.push({t:'Credit History tool loaded by proxy — Credit History Tool Test (Layer A) covers entire domain 124'});
     if(layer.id==='40569d2')layerNotes.push({t:'Same population as Layer 40569 — duplicate layer for independent Cash Flow Tab AO ramp'});
     if(layer.id==='40734')layerNotes.push({t:'Layer partially re-seeded on 4/16 — Typing + Optimization vs Control continues'});
