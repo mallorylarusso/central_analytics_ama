@@ -119,8 +119,8 @@ a.lnk:hover{text-decoration:underline;}
     <li class="done">Add Dashboard params to AMA Holdout and AMA Holdout #2.</li>
     <li class="done">Close PL AMA Entrypoint Phase 0 (71788). Tests are mutually exclusive today, but that won&rsquo;t be the case for long — PL must close before we ramp to ensure we don&rsquo;t expose the PL tool to any new entry point users as the ramp expands.</li>
     <li>Ramp AMA Holdout #2 to 5% sitewide on Mon 4/21.</li>
-    <li>Pause AMA Always On: Credit + CF (TBD) (72078) in domain 123 on Mon 4/21 because of stat sig negative revenue read. Resume with winning entry points after Credit Tab Test ends.</li>
-    <li>Close AMA Always On: Credit + CF (TBD) (72078) and Cash Flow Static Banner (72085) before Dashboard ramp on Mon 4/21.</li>
+    <li>Pause AMA Always On: Credit + CF (72078) in domain 123 on Mon 4/21 because of stat sig negative revenue read. Resume with winning entry points after Credit Tab Test ends.</li>
+    <li>Close AMA Always On: Credit + CF (72078) and Cash Flow Static Banner (72085) before Dashboard ramp on Mon 4/21.</li>
   </ul>
 </div>
 
@@ -128,10 +128,10 @@ a.lnk:hover{text-decoration:underline;}
 <div class="caveats-box">
   <h2>Caveats &amp; Watch-Outs</h2>
   <ul>
-    <li><strong>Both holdouts must remain fixed and uncontaminated.</strong> AMA Holdout and AMA Holdout #2 must remain at the same 6.25% of layer 40569, serving as long-term comparison groups for sitewide reads. Add new entry point parameters (spending insights and credit entry points) to the hold-out experiments before we begin ramping.</li>
+    <li><strong>Both holdouts must remain fixed and uncontaminated.</strong> AMA Holdout and AMA Holdout #2 both must remain at the same 6.25% of layer 40569, serving as long-term comparison groups for sitewide reads. Add new entry point parameters (spending insights and credit entry points) to the hold-out experiments before we begin ramping.</li>
     <li><strong>Dashboard Typing ramped to default ~5/20 (90% sitewide).</strong> Holds at 40% treatment sitewide for 4 weeks, then experiment closes and Dashboard Typing becomes the default experience. Two 5% holdouts (10% total) remain for sitewide AMA reads. Ramp approved 4/14.</li>
     <li><strong>Starting 4/16, users may begin to see multiple AMA experiences across surfaces in our Experimentation Domain (124).</strong></li>
-    <li><strong>Ramps greater than 20% sitewide (outside Domain 124) must be coupled or sequential.</strong> This means the Dashboard and Cash Flow Tab ramps should be coupled into a single AO experiment. If decoupled ramps are required, two new holdout domains would be needed — theoretically cleaner, but operationally creates too much complexity in reporting, monitoring, and stakeholder communication.</li>
+    <li><strong>Ramping entry points more than 20% sitewide (outside Domain 124) must be coupled or sequential.</strong> This means new entry points happening at the same time must be coupled at the same ramp %, or the ramps must be sequential. If simultaneous, different ramp %s are required for new entry points, two new holdout domains would be needed. This operationally creates complexity in reporting, monitoring, and stakeholder communication, so is not recommended.</li>
   </ul>
 </div>
 
@@ -249,13 +249,13 @@ function makeWarnPill(text){return '<span class="pill pill-warn">'+text+'</span>
 // Data
 var d123={id:123,label:'123 - Long-Term Analysis',layers:[
   {id:'40569',label:'Layer 40569',tests:[
-    {id:72078,name:'AMA Always On: Credit + CF (TBD)',type:'Always On',start:'2026-03-11',end:'2026-08-01',ao:true,noRamp:false,
+    {id:72078,name:'AMA Always On: Credit + CF',type:'Always On',start:'2026-03-11',end:'2026-08-01',ao:true,noRamp:false,
      barEnd:'2026-04-21',
      extraBars:[{start:'2026-05-28',end:'2026-06-28'},{start:'2026-06-28',end:'2026-08-01'}],
      goal:'Measure holistic AMA impact',kpi:'Sitewide metrics, CTR, AMA chat performance (incl. retention)',
      tools:[],toolSubNote:null,
-     notes:['Turning off Mon 4/21 due to stat sig negative revenue read','Resumes after Credit Tab Test ends with winning entry points','Cash Flow Tab ramp to be coupled with this one (TBD)'],
-     groups:[{name:'Champion: Credit + Cash Flow (TBD)',pct:6.3}],
+     notes:['Turning off Mon 4/21 due to stat sig negative revenue read','TBD — resumes after Spending Insights test wraps up at 50%, with winning entry points. Cash Flow Tab ramp to be coupled.'],
+     groups:[{name:'Champion: Credit + CF (TBD)',pct:6.3}],
      test_reads:[{label:'Credit Tab AO Read',date:'2026-04-13',url:SLIDES_BASE+'p22'}]},
     {id:72082,name:'AMA Holdout',type:'Long-Term Holdout',start:'2026-03-11',end:null,ao:false,
      goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
