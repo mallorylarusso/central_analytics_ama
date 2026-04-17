@@ -223,7 +223,7 @@ var AB_SHADES={
   73738:['#888780']
 };
 var FIXED_OFFSETS={
-  '40569':{'Champion: Credit + CF (TBD)':{fixedPct:6.3,ao:true,dashEnd:'2026-04-21'},'Cash Flow + Txns':{fixedPct:25,topOffset:12.6},'pl_entrypoint':{fixedPct:12.5,topOffset:37.6},'Control':{fixedPct:6.25,topOffset:0},'Control #2':{fixedPct:6.25,topOffset:6.25},'Typing Prompt Bar':{fixedPct:50,topOffset:50,dashStart:'2026-04-21'},'Dashboard Control':{fixedPct:37.5,topOffset:12.5,dashStart:'2026-04-21'}},
+  '40569':{'Champion: Credit + CF (TBD)':{fixedPct:6.3,topOffset:0,dashEnd:'2026-04-21'},'Cash Flow + Txns':{fixedPct:25,topOffset:12.6},'pl_entrypoint':{fixedPct:12.5,topOffset:37.6},'Control':{fixedPct:6.25,topOffset:0},'Control #2':{fixedPct:6.25,topOffset:6.25},'Typing Prompt Bar':{fixedPct:50,topOffset:50,dashStart:'2026-04-21'},'Dashboard Control':{fixedPct:37.5,topOffset:12.5,dashStart:'2026-04-21'}},
 };
 
 function parseDate(s){var p=s.split('-');return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));}
@@ -232,7 +232,7 @@ function toPos(v){var d=(typeof v==='string')?parseDate(v):v;return Math.max(0,M
 function swPct(domId,p){return Math.round(p*(domId===123?0.80:0.20)*10)/10;}
 function darwinLink(id){var ids=[72078,72082,72085,71788,72086,73738];for(var i=0;i<ids.length;i++)if(ids[i]===id)return'https://evolve.admin.creditkarma.com/darwin/experiments/'+id+'/overview';return null;}
 var CT_RAMP = [
-  {label:'5%', swPct:5,  start:'2026-03-11',end:'2026-04-16',fill:'#d4edc0',text:'#27500a'},
+  {label:'5%', swPct:5,  start:'2026-03-11',end:'2026-04-21',fill:'#d4edc0',text:'#27500a'},
   {label:'25%',swPct:25, start:'2026-05-28',end:'2026-06-28',fill:'#97c459',text:'#27500a'},
   {label:'50%',swPct:50, start:'2026-06-28',end:'2026-08-01',fill:'#639922',text:'#eaf3de'}
 ];
@@ -249,7 +249,7 @@ function makeWarnPill(text){return '<span class="pill pill-warn">'+text+'</span>
 // Data
 var d123={id:123,label:'123 - Long-Term Analysis',layers:[
   {id:'40569',label:'Layer 40569',tests:[
-    {id:72078,name:'AMA Always On: Credit + CF',type:'Always On',start:'2026-03-11',end:'2026-08-01',ao:true,noRamp:false,
+    {id:72078,name:'AMA Always On: Credit + CF',type:'Always On',start:'2026-03-11',end:'2026-04-21',ao:true,noRamp:false,
      barEnd:'2026-04-21',
      extraBars:[{start:'2026-05-28',end:'2026-06-28'},{start:'2026-06-28',end:'2026-08-01'}],
      goal:'Measure holistic AMA impact',kpi:'Sitewide metrics, CTR, AMA chat performance (incl. retention)',
@@ -613,7 +613,7 @@ function buildAlloc(domId,cid){
         legItems.push({name:g.name,fill:(isDashAO(t.id)&&!isCtrl(g.name))?'#fac775':(isDashAO(t.id)&&isCtrl(g.name))?'#e8e6de':(curRampPhase(t)?curRampPhase(t).fill:'#d4edc0'),sw:curSw,testId:t.id});
       } else if(useFixed&&FIXED_OFFSETS[layer.id]&&FIXED_OFFSETS[layer.id][g.name]){
         var fo=FIXED_OFFSETS[layer.id][g.name];
-        var sp2=toPos(fo.dashStart||t.start),ep2=t.end?toPos(t.end):100,wp2=Math.max(ep2-sp2,0.3);
+        var sp2=toPos(fo.dashStart||t.start),ep2=fo.dashEnd?toPos(fo.dashEnd):(t.end?toPos(t.end):100),wp2=Math.max(ep2-sp2,0.3);
         var yH2=(fo.fixedPct/100)*CHART_H,yTop2=(fo.topOffset/100)*CHART_H;
         var seg2=document.createElement('div');seg2.className='alloc-vseg';
         seg2.style.cssText='left:'+sp2+'%;width:'+wp2+'%;top:'+yTop2+'px;height:'+yH2+'px;background:'+fill+';position:absolute;';
