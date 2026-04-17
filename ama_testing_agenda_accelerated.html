@@ -95,10 +95,10 @@ a.lnk:hover{text-decoration:underline;}
 <div class="ramp-box">
   <h2>Accelerated Ramp Schedule &mdash; Dashboard (Typing variant)</h2>
   <table class="ramp-table">
-    <tr><th>Date</th><th>Sitewide %</th><th>Domain 123 (80% sw)</th><th>Domain 124 (20% sw)</th><th>Notes</th></tr>
-    <tr><td>Thu 4/16</td><td><strong>10%</strong></td><td>12.5% of layer</td><td>—</td><td></td></tr>
-    <tr><td>Mon 4/21</td><td><strong>50%</strong></td><td>50% of layer (40% sw)</td><td>50% of layer (10% sw)</td><td>Hold 4 weeks — monitor sitewide engagement and revenue impact</td></tr>
-    <tr class="highlight"><td>~Wed 5/20</td><td><strong>90%</strong></td><td>Ramp to default</td><td>—</td><td>Close experiments &amp; promote; AMA Holdouts already at 10%</td></tr>
+    <tr><th>Date</th><th>Sitewide %</th><th>Domain 123 (80% sw)</th><th>Notes</th></tr>
+    <tr><td>Thu 4/16</td><td><strong>10%</strong></td><td>—</td><td>Domain 124 only — via Dashboard Prompt Bar test (72086)</td></tr>
+    <tr><td>Mon 4/21</td><td><strong>40%</strong></td><td>50% of layer (40% sw treatment, 30% sw control)</td><td>Hold 4 weeks — monitor sitewide engagement and revenue impact</td></tr>
+    <tr class="highlight"><td>~Wed 5/20</td><td><strong>90%</strong></td><td>Ramp to default</td><td>Close experiment &amp; promote; AMA Holdouts already at 10%</td></tr>
   </table>
   <div class="metrics-box">
     <h3>Metrics monitored daily at each step <a href="https://docs.google.com/spreadsheets/d/1EbNdTPqykMSVChYvjRvq6mZdX2A0ZDZbdRxyljcnY98/edit?gid=1487756681#gid=1487756681&range=A1" target="_blank" style="font-size:10px;font-weight:400;">↗ GSheet Link</a></h3>
@@ -106,7 +106,6 @@ a.lnk:hover{text-decoration:underline;}
       <li>CTR</li>
       <li>% of Clicks with Message Sent</li>
       <li>Positive Feedback Rate</li>
-      <li>Requests/min</li>
     </ul>
     <span class="revenue">Estimated revenue impact at 90% sitewide: -$10.9M to +$12.7M/mo.</span>
     <div style="margin-top:6px;font-size:11px;color:#5f5e5a;">If RpU lift holds (+0.8%) we should have enough power to get a stat sig revenue read after 4 weeks at 50% while cutting downside risk in half vs. ramping straight to 90%.</div>
@@ -118,12 +117,10 @@ a.lnk:hover{text-decoration:underline;}
   <h2>Pre-Requisites (before beginning phased Dashboard ramp)</h2>
   <ul>
     <li class="done">Add Dashboard params to AMA Holdout and AMA Holdout #2.</li>
-    <li>Ramp AMA Holdout #2 to 5% sitewide.</li>
-    <li>Pause AMA Always On: Credit Tab (72078) in domain 123 because of stat sig negative revenue read. Resume after testing new entry points.</li>
-    <li>Close Dashboard Prompt Bar Initial Test (72086) in domain 124.</li>
-    <li>Check min app versions for Dashboard Prompt Bar variations (iOS 26.8, Android 26.13).</li>
-    <li>Close PL AMA Entrypoint Phase 0 (71788). Tests are mutually exclusive today, but that won&rsquo;t be the case for long — PL must close before we ramp to ensure we don&rsquo;t expose the PL tool to any new entry point users as the ramp expands.</li>
-    <li>Set control to 10% in Layer 40569 dup #1 (same population as AMA Holdout), then re-seed the layer.</li>
+    <li class="done">Close PL AMA Entrypoint Phase 0 (71788). Tests are mutually exclusive today, but that won&rsquo;t be the case for long — PL must close before we ramp to ensure we don&rsquo;t expose the PL tool to any new entry point users as the ramp expands.</li>
+    <li>Ramp AMA Holdout #2 to 5% sitewide on Mon 4/21.</li>
+    <li>Pause AMA Always On: Credit + CF (TBD) (72078) in domain 123 on Mon 4/21 because of stat sig negative revenue read. Resume with winning entry points after Credit Tab Test ends.</li>
+    <li>Close AMA Always On: Credit + CF (TBD) (72078) and Cash Flow Static Banner (72085) before Dashboard ramp on Mon 4/21.</li>
   </ul>
 </div>
 
@@ -131,9 +128,10 @@ a.lnk:hover{text-decoration:underline;}
 <div class="caveats-box">
   <h2>Caveats &amp; Watch-Outs</h2>
   <ul>
-    <li><strong>Both holdouts must remain fixed and uncontaminated.</strong> AMA Holdout and AMA Holdout #2 (6.25% of layer each) are mirrored across all duplicate layers in domain 123. Do not adjust either holdout allocation at any ramp step — they are the long-term comparison groups for sitewide reads. Specifically, new spending insights and credit entry points must be added to both holdouts before ramping those experiments.</li>
-    <li><strong>Dashboard Typing ramped to default ~5/20 (90% sitewide).</strong> Holds at 50% for 4 weeks, then experiment closes and Dashboard Typing becomes the default experience. Two 5% holdouts (10% total) remain for sitewide AMA reads. Ramp approved 4/14.</li>
-    <li><strong>Starting 4/16, users may begin to see multiple AMA experiences across surfaces.</strong></li>
+    <li><strong>Both holdouts must remain fixed and uncontaminated.</strong> AMA Holdout and AMA Holdout #2 must remain at the same 6.25% of layer 40569, serving as long-term comparison groups for sitewide reads. Add new entry point parameters (spending insights and credit entry points) to the hold-out experiments before we begin ramping.</li>
+    <li><strong>Dashboard Typing ramped to default ~5/20 (90% sitewide).</strong> Holds at 40% treatment sitewide for 4 weeks, then experiment closes and Dashboard Typing becomes the default experience. Two 5% holdouts (10% total) remain for sitewide AMA reads. Ramp approved 4/14.</li>
+    <li><strong>Starting 4/16, users may begin to see multiple AMA experiences across surfaces in our Experimentation Domain (124).</strong></li>
+    <li><strong>Ramps greater than 20% sitewide (outside Domain 124) must be coupled or sequential.</strong> This means the Dashboard and Cash Flow Tab ramps should be coupled into a single AO experiment. If decoupled ramps are required, two new holdout domains would be needed — theoretically cleaner, but operationally creates too much complexity in reporting, monitoring, and stakeholder communication.</li>
   </ul>
 </div>
 
@@ -184,9 +182,8 @@ var SLIDES_BASE = 'https://docs.google.com/presentation/d/1OZcZGHVTn31-0ZlaXSiE-
 
 // Accelerated ramp schedule - Dashboard to 90% sitewide
 var AO_RAMP = [
-  {label:'5%',  swPct:5,  start:'2026-03-11',end:'2026-04-15',fill:'#d4edc0',text:'#27500a'},
-  {label:'10%', swPct:10, start:'2026-04-16',end:'2026-04-20',fill:'#c0dd97',text:'#27500a'},
-  {label:'50%', swPct:50, d123LayerPct:50, d124LayerPct:50, start:'2026-04-21',end:'2026-05-20',fill:'#639922',text:'#eaf3de'}
+  {label:'5%',  swPct:5,  start:'2026-03-11',end:'2026-04-20',fill:'#d4edc0',text:'#27500a'},
+  {label:'40%', swPct:40, d123LayerPct:50, d124LayerPct:50, start:'2026-04-21',end:'2026-05-20',fill:'#639922',text:'#eaf3de'}
 ];
 var DASH_DEFAULT_DATE = '2026-05-20';
 var DASH_DEFAULT_PIN = new Date(2026,4,20);
@@ -207,7 +204,7 @@ function forceLink(testId,gname){
 }
 
 var COLORS={
-  72078:'#9fe1cb',720780:'#5dcaa5',720781:'#fac775',720782:'#fac775',720783:'#9fe1cb',
+  72078:'#9fe1cb',720781:'#fac775',720783:'#9fe1cb',
   72082:'#888780',72085:'#85b7eb',71788:'#cecbf6',
   72086:'#fac775',88001:'#6dcaaa',88002:'#ed93b1',
   88003:'#85b7eb',88004:'#6dcaaa',88005:'#6dcaaa',
@@ -216,6 +213,7 @@ var COLORS={
 };
 var AB_SHADES={
   72086:['#fac775','#f0b050','#e09040','#cc7830','#b86020'],
+
   88001:['#6dcaaa'],
   88002:['#ed93b1','#d4537e','#c04570','#a83562','#903060','#781050'],
   88003:['#b5d4f4','#85b7eb','#5090d0'],
@@ -225,10 +223,7 @@ var AB_SHADES={
   73738:['#888780']
 };
 var FIXED_OFFSETS={
-  '40569':{'Champion: Credit Tab':{fixedPct:6.3,ao:true},'Cash Flow + Txns':{fixedPct:25,topOffset:12.6},'pl_entrypoint':{fixedPct:12.5,topOffset:37.6},'Control':{fixedPct:6.25,topOffset:0},'Control #2':{fixedPct:6.25,topOffset:6.25}},
-  '40569d1':{'Typing Prompt Bar':{fixedPct:6.3,ao:true},'Control':{fixedPct:6.25,topOffset:0},'Control #2':{fixedPct:6.25,topOffset:6.25}},
-  '40569d2':{'Champion: Cash Flow Tab':{fixedPct:6.3,ao:true},'Control':{fixedPct:6.25,topOffset:0},'Control #2':{fixedPct:6.25,topOffset:6.25}},
-  'TBD-DASH2':{'Typing Prompt Bar':{fixedPct:50,topOffset:50},'Control':{fixedPct:50,topOffset:0}},
+  '40569':{'Champion: Credit Tab':{fixedPct:6.3,ao:true},'Cash Flow + Txns':{fixedPct:25,topOffset:12.6},'pl_entrypoint':{fixedPct:12.5,topOffset:37.6},'Control':{fixedPct:6.25,topOffset:0},'Control #2':{fixedPct:6.25,topOffset:6.25},'Typing Prompt Bar':{fixedPct:50,topOffset:50,dashStart:'2026-04-21'},'Dashboard Control':{fixedPct:37.5,topOffset:12.5,dashStart:'2026-04-21'}},
 };
 
 function parseDate(s){var p=s.split('-');return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));}
@@ -241,15 +236,11 @@ var CT_RAMP = [
   {label:'25%',swPct:25, start:'2026-05-28',end:'2026-06-28',fill:'#97c459',text:'#27500a'},
   {label:'50%',swPct:50, start:'2026-06-28',end:'2026-08-01',fill:'#639922',text:'#eaf3de'}
 ];
-var CF_RAMP = [
-  {label:'50%',swPct:50, start:'2026-06-30',end:'2026-08-01',fill:'#639922',text:'#eaf3de'}
-];
-function getRamp(t){if(t.noRamp)return[];if(t.id===72078)return CT_RAMP;if(t.id===720780)return CF_RAMP;return AO_RAMP;}
+function getRamp(t){if(t.noRamp)return[];if(t.id===72078)return CT_RAMP;return AO_RAMP;}
 function isDashAO(id){return id===720781;}
-function isDash2(id){return id===720782;}
 function curRampPhase(t){var r=getRamp(t);for(var i=r.length-1;i>=0;i--)if(TODAY>=parseDate(r[i].start))return r[i];return null;}
 function pillClass(type){if(type==='Always On')return'pill-ao';if(type==='Long-Term Holdout')return'pill-lth';if(type==='Data Collection')return'pill-dc';return'pill-ab';}
-function isCtrl(name){return name.toLowerCase().indexOf('control')===0;}
+function isCtrl(name){return name.toLowerCase().indexOf('control')===0||name==='Dashboard Control';}
 function makePill(text,cls){return '<span class="pill '+cls+'">'+text+'</span>';}
 function makeToolPill(text){return '<span class="pill pill-tool">'+text+'</span>';}
 function makeNotePill(text){return '<span class="pill pill-note">'+text+'</span>';}
@@ -258,25 +249,25 @@ function makeWarnPill(text){return '<span class="pill pill-warn">'+text+'</span>
 // Data
 var d123={id:123,label:'123 - Long-Term Analysis',layers:[
   {id:'40569',label:'Layer 40569',tests:[
-    {id:72078,name:'AMA Always On: Credit Tab',type:'Always On',start:'2026-03-11',end:'2026-08-01',ao:true,noRamp:false,
-     barEnd:'2026-04-16',
+    {id:72078,name:'AMA Always On: Credit + CF (TBD)',type:'Always On',start:'2026-03-11',end:'2026-08-01',ao:true,noRamp:false,
+     barEnd:'2026-04-21',
      extraBars:[{start:'2026-05-28',end:'2026-06-28'},{start:'2026-06-28',end:'2026-08-01'}],
      goal:'Measure holistic AMA impact',kpi:'Sitewide metrics, CTR, AMA chat performance (incl. retention)',
      tools:[],toolSubNote:null,
-     notes:['Turned off 4/16 due to stat sig negative revenue read','Resumes after Credit Tab Test ends: 25% (5/28) \u2192 50% (6/28)'],
-     groups:[{name:'Champion: Credit Tab',pct:6.3}],
+     notes:['Turning off Mon 4/21 due to stat sig negative revenue read','Resumes after Credit Tab Test ends with winning entry points','Cash Flow Tab ramp to be coupled with this one (TBD)'],
+     groups:[{name:'Champion: Credit + Cash Flow (TBD)',pct:6.3}],
      test_reads:[{label:'Credit Tab AO Read',date:'2026-04-13',url:SLIDES_BASE+'p22'}]},
     {id:72082,name:'AMA Holdout',type:'Long-Term Holdout',start:'2026-03-11',end:null,ao:false,
      goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
      tools:[],toolSubNote:null,notes:['5% holdout remains consistent across all ramp steps'],
      groups:[{name:'Control',pct:6.25}]},
-    {id:73738,name:'AMA Holdout #2',type:'Long-Term Holdout',start:'2026-04-16',end:null,ao:false,
+    {id:73738,name:'AMA Holdout #2',type:'Long-Term Holdout',start:'2026-04-21',end:null,ao:false,
      goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
      tools:[],toolSubNote:null,notes:['5% holdout remains consistent across all ramp steps'],
      groups:[{name:'Control #2',pct:6.25}]},
-    {id:72085,name:'Cash Flow Static Banner',type:'Data Collection',start:'2026-03-11',end:'2026-04-30',ao:false,
+    {id:72085,name:'Cash Flow Static Banner',type:'Data Collection',start:'2026-03-11',end:'2026-04-21',ao:false,
      goal:'Collect prompts for DS / Evals',kpi:'Chat log data',
-     tools:['txns_tool loaded'],toolSubNote:null,notes:['Closes when Spending Insights test starts (4/30)'],
+     tools:['txns_tool loaded'],toolSubNote:null,notes:['Closes on 4/21 for dashboard ramp, prompt goal reached.'],
      groups:[{name:'Cash Flow + Txns',pct:25}],
      test_reads:[{label:'Cash Flow Data Collection Read',date:'2026-04-13',url:SLIDES_BASE+'p23'}]},
     {id:71788,name:'PL AMA Entrypoint Phase 0',type:'Data Collection',start:'2026-03-11',end:'2026-04-16',ao:false,
@@ -284,61 +275,29 @@ var d123={id:123,label:'123 - Long-Term Analysis',layers:[
      tools:['pl_tool loaded'],toolSubNote:'*no txns_tool',
      notes:[],
      groups:[{name:'pl_entrypoint',pct:12.5}]},
-  ]},
-  {id:'40569d1',label:'Layer 40569 dup #1',tests:[
-    {id:720781,name:'AMA Dashboard Typing Prompt Bar',type:'Multivariate A/B',start:'2026-04-16',end:'2026-05-20',ao:true,noRamp:false,
+    {id:720781,name:'AMA Dashboard Typing Prompt Bar',type:'Multivariate A/B',start:'2026-04-21',end:'2026-05-20',ao:true,noRamp:false,
      goal:'Ramp AMA prompt bar to default slowly while monitoring impact at each step',kpi:'Sitewide metrics (revenue, engagement), CTR, AMA chat performance (incl. retention)',
      tools:[],toolSubNote:null,
-     notes:['ACCELERATED: 10% (4/16) \u2192 50% (4/21) \u2192 hold 4 weeks \u2192 default (~5/20)','Typing variant selected as winner from Dashboard Prompt Bar Initial Test','Dup of Layer 40569 — ensure control group includes AMA holdout, then re-seed to measure Dashboard performance (not combined AMA impact)'],
-     groups:[{name:'Typing Prompt Bar',pct:6.3}]},
-    {id:72082,name:'AMA Holdout',type:'Long-Term Holdout',start:'2026-03-11',end:null,ao:false,allocOnly:true,
-     goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
-     tools:[],toolSubNote:null,notes:[],
-     groups:[{name:'Control',pct:6.25}]},
-    {id:73738,name:'AMA Holdout #2',type:'Long-Term Holdout',start:'2026-04-23',end:null,ao:false,allocOnly:true,
-     goal:'Second holdout for sitewide AMA reads after Dashboard ramp to default',kpi:'N/A',
-     tools:[],toolSubNote:null,notes:[],
-     groups:[{name:'Control #2',pct:6.25}]}
+     notes:['ACCELERATED: 40% sw treatment (4/21) \u2192 hold 4 weeks \u2192 default (~5/20)','Typing variant selected as winner from Dashboard Prompt Bar Initial Test'],
+     groups:[{name:'Typing Prompt Bar',pct:50},{name:'Dashboard Control',pct:37.5}]},
   ]},
-  {id:'40569d2',label:'Layer 40569 dup #2',tests:[
-    {id:720780,name:'AMA Always On: Cash Flow Tab',type:'Always On',start:'2026-06-30',end:null,ao:true,noRamp:false,
-     goal:'Measure holistic AMA impact on Cash Flow Tab',kpi:'Sitewide metrics, CTR, AMA chat performance (incl. retention)',
-     tools:[],toolSubNote:null,
-     notes:['Starts after Spending Insights test ends (6/30)'],
-     groups:[{name:'Champion: Cash Flow Tab',pct:6.3}]},
-    {id:72082,name:'AMA Holdout',type:'Long-Term Holdout',start:'2026-03-11',end:null,ao:false,allocOnly:true,
-     goal:'Long-term comparison group for any sitewide AMA reads',kpi:'N/A',
-     tools:[],toolSubNote:null,notes:[],
-     groups:[{name:'Control',pct:6.25}]},
-    {id:73738,name:'AMA Holdout #2',type:'Long-Term Holdout',start:'2026-04-23',end:null,ao:false,allocOnly:true,
-     goal:'Second holdout for sitewide AMA reads after Dashboard ramp to default',kpi:'N/A',
-     tools:[],toolSubNote:null,notes:[],
-     groups:[{name:'Control #2',pct:6.25}]}
-  ]}
 ]};
 
 var d124={id:124,label:'124 - Experimentation',layers:[
   {id:'40734',label:'Layer 40734',tests:[
-    {id:72086,name:'Dashboard Prompt Bar Initial Test',type:'Multivariate A/B',start:'2026-03-11',end:'2026-04-16',ao:false,
+    {id:72086,name:'Dashboard Prompt Bar',type:'Multivariate A/B',start:'2026-03-11',end:'2026-05-20',ao:false,
      goal:'Determine winning prompt bar variant; measure AMA impact on dashboard',
      kpi:'Sitewide metrics (dashboard only), surface retention, CTR, AMA chat performance (incl. retention)',
      tools:['txns_tool loaded'],toolSubNote:null,
-     notes:['Winner: Typing variant'],
-     groups:[{name:'Click',pct:2.5},{name:'Click + Optimization',pct:2.5},{name:'Control',pct:2.5},{name:'Typing',pct:2.5},{name:'Typing + Optimization',pct:2.5}],
+     notes:['3/11–4/16: 5-variant test (Click, Click + Opt, Typing, Typing + Opt, Control) — Winner: Typing variant','4/16–5/20: Typing + Optimization vs Control (10/10 split)','Layer partially re-seeded on 4/16'],
+     phase1:{end:'2026-04-16',groups:[{name:'Click',pct:2.5},{name:'Click + Optimization',pct:2.5},{name:'Control',pct:2.5},{name:'Typing',pct:2.5},{name:'Typing + Optimization',pct:2.5}]},
+     groups:[{name:'Typing + Optimization',pct:50},{name:'Control',pct:50}],
      test_reads:[
        {label:'Txns Read',date:'2026-04-01',url:'test_reads/ama_72086_test_reads.html'},
        {label:'Click vs Type Read',date:'2026-04-13',url:SLIDES_BASE+'p21'}
      ]}
   ]},
-  {id:'TBD-DASH2',label:'New Layer A - AMA Dashboard Typing Prompt Bar 2',tests:[
-    {id:720782,name:'AMA Dashboard Typing Prompt Bar 2',type:'Multivariate A/B',start:'2026-04-21',end:'2026-05-20',ao:true,noRamp:false,
-     goal:'Ramp AMA prompt bar to default slowly while monitoring impact at each step',
-     kpi:'Sitewide metrics (revenue, engagement), CTR, AMA chat performance (incl. retention)',
-     tools:[],toolSubNote:null,
-     notes:['Launches 4/21 alongside Domain 123 ramp step; combined sitewide = 50%','50/50 split: Typing Prompt Bar vs Control (no holdout in domain 124)','Layer TBD'],
-     groups:[{name:'Typing Prompt Bar',pct:50},{name:'Control',pct:50}]}
-  ]},
-  {id:'NEW-CH-TEST',label:'New Layer B - AMA Credit History Tool',tests:[
+  {id:'NEW-CH-TEST',label:'New Layer A - AMA Credit History Tool',tests:[
     {id:88005,name:'AMA Credit History Tool',type:'Data Collection',start:'2026-04-23',end:'2026-04-30',ao:false,
      goal:'Ensure value of Credit History tool on Dashboard AMA',
      kpi:'Chat log review, positive feedback rate, prompts per session',
@@ -346,7 +305,7 @@ var d124={id:124,label:'124 - Experimentation',layers:[
      notes:['All Credit Tab Test users will have Credit History during this testing window — and after ramping to default, all users will have it','If a direct comparison against no Credit History is needed, we can sample non-holdout users from the 123 domain as a control'],
      groups:[{name:'Credit History ON',pct:100}]}
   ]},
-  {id:'NEW-CT-TEST',label:'New Layer C - AMA Credit Tab Test',tests:[
+  {id:'NEW-CT-TEST',label:'New Layer B - AMA Credit Tab Test',tests:[
     {id:88002,name:'AMA Credit Tab Test',type:'Multivariate A/B',start:'2026-04-23',end:'2026-05-28',ao:false,
      goal:'Determine if new entry points are comparable to champion; assess impact of all 5 combined',
      kpi:'Sitewide read (revenue, engagement), CTR, chat performance (incl. retention)',
@@ -358,7 +317,7 @@ var d124={id:124,label:'124 - Experimentation',layers:[
        {name:'Prompt bar',pct:16.6},{name:'Banner + SWC + Sparkles + Prompt bar',pct:16.6}
      ]}
   ]},
-  {id:'TBD-A',label:'New Layer D - AMA Chat History',tests:[
+  {id:'TBD-A',label:'New Layer C - AMA Chat History',tests:[
     {id:88001,name:'AMA Chat History Test',type:'Multivariate A/B',start:'2026-04-28',end:'2026-05-28',ao:false,
      goal:'Evaluate usage and feasibility of chat history feature',
      kpi:'CTR, chat performance (incl. weekly AMA retention)',
@@ -366,7 +325,7 @@ var d124={id:124,label:'124 - Experimentation',layers:[
      notes:['Caution: if tools tested here are not ramped to default after closing, users cannot continue those chats'],
      groups:[{name:'Chat History ON',pct:50},{name:'Control',pct:50}]}
   ]},
-  {id:'TBD-B',label:'New Layer E - Spending Insights Re-Route to AMA',tests:[
+  {id:'TBD-B',label:'New Layer D - Spending Insights Re-Route to AMA',tests:[
     {id:88003,name:'Spending Insights Re-Route to AMA',type:'Multivariate A/B',start:'2026-04-30',end:'2026-06-30',ao:false,
      goal:'Determine winning variant of spending insights re-routing to AMA',
      kpi:'CTR, M1 surface retention (cash flow tab and generated insights), chat performance',
@@ -374,7 +333,7 @@ var d124={id:124,label:'124 - Experimentation',layers:[
      notes:['Requires sign-off from FM team before launch','Close Cash Flow Static Banner data collection when this starts','Will use AMA holdout as control group'],
      groups:[{name:'Spending Insights → AMA With Header',pct:50},{name:'Spending Insights → AMA Without Header',pct:50}]}
   ]},
-  {id:'TBD-C',label:'New Layer F - AMA PL Tool Test (TBD)',tests:[
+  {id:'TBD-C',label:'New Layer E - AMA PL Tool Test (TBD)',tests:[
     {id:88004,name:'AMA PL Tool Test',type:'Multivariate A/B',start:'2026-06-01',end:null,ao:false,
      goal:'Test PL tool in AMA via active experiment entry points (or new entry point if needed)',
      kpi:'Chat performance (incl. weekly AMA retention)',
@@ -424,7 +383,7 @@ function buildTimeline(domId,cid){
       var futureRamp=getRamp(t);var futureMax=futureRamp.length?futureRamp[futureRamp.length-1]:null;
       var swTxt=t.ao?(cur?cur.swPct+'% sw':(futureMax?futureMax.swPct+'% sw':'0% sw - not yet ramped')):(isHoldout?swPct(domId,totalPct)+'% sw':swPct(domId,ncPct)+'% sw');
       var swColor=t.ao&&cur?'#3b6d11':t.ao?'#888780':'#1a1a18';
-      var barColor=(isDashAO(t.id)||isDash2(t.id))?'#fac775':t.ao?(cur?cur.fill:'#d4edc0'):(COLORS[t.id]||'#d3d1c7');
+      var barColor=isDashAO(t.id)?'#fac775':t.ao?(cur?cur.fill:'#d4edc0'):(COLORS[t.id]||'#d3d1c7');
 
 
       var row=document.createElement('div');row.className='tl-row';
@@ -552,7 +511,7 @@ function buildAlloc(domId,cid){
       var ctrl=isCtrl(g.name),shades=AB_SHADES[t.id];
       var fill=ctrl?COLORS.ctrl:(shades?(shades[gi]||shades[shades.length-1]):(COLORS[t.id]||'#d3d1c7'));
       if(t.ao&&!(useFixed&&FIXED_OFFSETS[layer.id]&&FIXED_OFFSETS[layer.id][g.name]&&!FIXED_OFFSETS[layer.id][g.name].ao)){
-        var ramp=getRamp(t),sd=parseDate(t.start),ed=t.end?parseDate(t.end):RE;
+        var ramp=getRamp(t),sd=parseDate(t.start),ed=(t.barEnd?parseDate(t.barEnd):null)||(t.end?parseDate(t.end):RE);
         // Calculate stack offset for AO tests in same layer
         var aoBaseH=0;
         var ctPhase=null;
@@ -573,6 +532,10 @@ function buildAlloc(domId,cid){
         }
         // Use SVG staircase for Dashboard AO (ids 720781/720782) to avoid thin-bar problem
         var dashStackBase=(useFixed&&FIXED_OFFSETS[layer.id]&&FIXED_OFFSETS[layer.id][g.name]&&FIXED_OFFSETS[layer.id][g.name].topOffset!==undefined)?FIXED_OFFSETS[layer.id][g.name].topOffset:0;
+        // For isDashAO control, stack on top of Typing Prompt Bar by adding its lp as stackLp
+        if(isDashAO(t.id)&&isCtrl(g.name)){
+          for(var vsi2=0;vsi2<validSegs.length;vsi2++){validSegs[vsi2].stackLp=validSegs[vsi2].lp;}
+        }
         if(isDashAO(t.id)&&!isCtrl(g.name)&&validSegs.length>0){
           // Draw filled staircase area using SVG
           var svgNS='http://www.w3.org/2000/svg';
@@ -591,7 +554,7 @@ function buildAlloc(domId,cid){
             var rect=document.createElementNS(svgNS,'rect');
             rect.setAttribute('x',x1pct+'%');rect.setAttribute('y',segTop2+'px');
             rect.setAttribute('width',segW+'%');rect.setAttribute('height',segH2+'px');
-            var dashFills=['#fde4b0','#fac775','#e09040']; // light→mid→dark yellow for 10%→50%
+            var dashFills=['#fde4b0','#fac775','#e09040']; // light→mid→dark yellow for 5%→40%
             rect.setAttribute('fill',dashFills[Math.min(si,dashFills.length-1)]);
             rect.innerHTML='<title>'+g.name+' - '+vs.ph.swPct+'% sitewide</title>';
             svgEl.appendChild(rect);
@@ -633,7 +596,8 @@ function buildAlloc(domId,cid){
             var seg=document.createElement('div');seg.className='alloc-vseg';
             var seg4fill=(isDashAO(t.id)&&isCtrl(g.name))?'#e8e6de':vs4.ph.fill;
             var seg4text=(isDashAO(t.id)&&isCtrl(g.name))?'#555':vs4.ph.text;
-            seg.style.cssText='left:'+segSp+'%;width:'+segWp+'%;top:'+segTop4+'px;height:'+segH4+'px;background:'+seg4fill+';color:'+seg4text+';';
+            var seg4z=(isDashAO(t.id)&&isCtrl(g.name))?'z-index:4;':'';
+            seg.style.cssText='left:'+segSp+'%;width:'+segWp+'%;top:'+segTop4+'px;height:'+segH4+'px;background:'+seg4fill+';color:'+seg4text+';'+seg4z;
             seg.title=g.name+' - '+vs4.ph.swPct+'% sitewide';if(segWp>=2&&segH4>12)seg.textContent=vs4.ph.label;
             canvas.appendChild(seg);
           }
@@ -649,13 +613,22 @@ function buildAlloc(domId,cid){
         legItems.push({name:g.name,fill:(isDashAO(t.id)&&!isCtrl(g.name))?'#fac775':(isDashAO(t.id)&&isCtrl(g.name))?'#e8e6de':(curRampPhase(t)?curRampPhase(t).fill:'#d4edc0'),sw:curSw,testId:t.id});
       } else if(useFixed&&FIXED_OFFSETS[layer.id]&&FIXED_OFFSETS[layer.id][g.name]){
         var fo=FIXED_OFFSETS[layer.id][g.name];
-        var sp2=toPos(t.start),ep2=t.end?toPos(t.end):100,wp2=Math.max(ep2-sp2,0.3);
+        var sp2=toPos(fo.dashStart||t.start),ep2=t.end?toPos(t.end):100,wp2=Math.max(ep2-sp2,0.3);
         var yH2=(fo.fixedPct/100)*CHART_H,yTop2=(fo.topOffset/100)*CHART_H;
         var seg2=document.createElement('div');seg2.className='alloc-vseg';
         seg2.style.cssText='left:'+sp2+'%;width:'+wp2+'%;top:'+yTop2+'px;height:'+yH2+'px;background:'+fill+';position:absolute;';
         var swLbl2=swPct(domId,fo.fixedPct)+'%';seg2.title=g.name+' - '+swLbl2+' sitewide';
         if(yH2>8&&wp2>5){var sl=document.createElement('span');sl.style.cssText='position:absolute;top:2px;left:0;right:0;text-align:center;font-size:8px;font-weight:500;color:rgba(0,0,0,.5);pointer-events:none;';sl.textContent=swLbl2;seg2.appendChild(sl);}
         canvas.appendChild(seg2);legItems.push({name:g.name,fill:fill,sw:swLbl2,testId:t.id});
+      } else if(t.phase1) {
+        // Phase 2 bar: from phase1.end to t.end
+        var p2s=toPos(t.phase1.end),p2e=t.end?toPos(t.end):100,p2w=Math.max(p2e-p2s,0.3);
+        var yTop3=(1-(offset+g.pct)/100)*CHART_H,yH3=(g.pct/100)*CHART_H;
+        var seg3=document.createElement('div');seg3.className='alloc-vseg';
+        seg3.style.cssText='left:'+p2s+'%;width:'+p2w+'%;top:'+yTop3+'px;height:'+yH3+'px;background:'+fill+';';
+        var swLbl3=swPct(domId,g.pct)+'%';seg3.title=g.name+' - '+swLbl3+' sitewide';
+        if(yH3>10&&p2w>5)seg3.textContent=swLbl3;
+        canvas.appendChild(seg3);legItems.push({name:g.name,fill:fill,sw:swLbl3,testId:t.id,phase2:true});
       } else {
         var sp3=toPos(t.start),ep3=t.end?toPos(t.end):100,wp3=Math.max(ep3-sp3,0.3);
         var yTop3=(1-(offset+g.pct)/100)*CHART_H,yH3=(g.pct/100)*CHART_H;
@@ -667,11 +640,56 @@ function buildAlloc(domId,cid){
       }
     }
 
+    // Render phase1 groups for tests that have a phase1 property
+    var phase1Tests={};
+    for(var ti2=0;ti2<layer.tests.length;ti2++){
+      var tp=layer.tests[ti2];
+      if(!tp.phase1)continue;
+      var p1groups=tp.phase1.groups,p1end=tp.phase1.end;
+      var p1cursor=0;
+      // Sort: controls on top (highest offset)
+      var p1sorted=p1groups.slice().sort(function(a,b){return(isCtrl(b.name)?0:1)-(isCtrl(a.name)?0:1);});
+      for(var p1i=0;p1i<p1sorted.length;p1i++){
+        var p1g=p1sorted[p1i],p1gi=p1groups.indexOf(p1g);
+        var p1ctrl=isCtrl(p1g.name),p1shades=AB_SHADES[tp.id];
+        var p1fill=p1ctrl?COLORS.ctrl:(p1shades?(p1shades[p1gi]||p1shades[p1shades.length-1]):(COLORS[tp.id]||'#d3d1c7'));
+        var p1sp=toPos(tp.start),p1ep=toPos(p1end),p1wp=Math.max(p1ep-p1sp,0.3);
+        var p1yTop=(1-(p1cursor+p1g.pct)/100)*CHART_H,p1yH=(p1g.pct/100)*CHART_H;
+        var p1seg=document.createElement('div');p1seg.className='alloc-vseg';
+        p1seg.style.cssText='left:'+p1sp+'%;width:'+p1wp+'%;top:'+p1yTop+'px;height:'+p1yH+'px;background:'+p1fill+';';
+        var p1sw=swPct(domId,p1g.pct)+'%';p1seg.title=p1g.name+' - '+p1sw+' sitewide (phase 1)';
+        canvas.appendChild(p1seg);
+        if(!phase1Tests[tp.id])phase1Tests[tp.id]={groups:p1sorted,testId:tp.id};
+        p1cursor+=p1g.pct;
+      }
+      // Re-seed divider line
+      var reseedX=toPos(p1end);
+      var reseedLine=document.createElement('div');
+      reseedLine.style.cssText='position:absolute;left:'+reseedX+'%;top:0;width:2px;height:'+CHART_H+'px;background:rgba(0,0,0,0.25);z-index:5;pointer-events:none;';
+      reseedLine.title='Layer re-seeded 4/16';
+      canvas.appendChild(reseedLine);
+    }
+
     chartRow.appendChild(canvas);lb.appendChild(chartRow);
     var legEl=document.createElement('div');legEl.className='alloc-legend';
+    // Separate phase2 items from regular items
+    var phase2Items=legItems.filter(function(x){return x.phase2;});
+    var regularItems=legItems.filter(function(x){return !x.phase2;});
+    if(phase2Items.length>0){
+      var p2html='<span style="font-size:9px;color:#888780;margin-right:6px;">4/16\u20135/20:</span>';
+      var p2seen={};
+      for(var p2i=0;p2i<phase2Items.length;p2i++){
+        var p2item=phase2Items[p2i];if(p2seen[p2item.name])continue;p2seen[p2item.name]=true;
+        var p2fl=forceLink(p2item.testId,p2item.name);
+        p2html+='<span class="alloc-leg-item" style="font-weight:600;"><span class="alloc-leg-sw" style="background:'+p2item.fill+'"></span><strong>'+p2item.name+'</strong> ('+p2item.sw+')';
+        if(p2fl)p2html+=' <a href="'+p2fl+'" target="_blank" style="color:#854f0b;text-decoration:none;font-size:11px;">&#9889;</a>';
+        p2html+='</span>';
+      }
+      legEl.innerHTML+=p2html;
+    }
     var seen={};
-    for(var legi=0;legi<legItems.length;legi++){
-      var li2=legItems[legi];if(seen[li2.name])continue;seen[li2.name]=true;
+    for(var legi=0;legi<regularItems.length;legi++){
+      var li2=regularItems[legi];if(seen[li2.name])continue;seen[li2.name]=true;
       var fl=forceLink(li2.testId,li2.name);
       var isWinner=(li2.name==='Typing + Optimization');
       var nameDisplay=isWinner?'<strong>'+li2.name+' ★</strong>':li2.name;
@@ -680,12 +698,34 @@ function buildAlloc(domId,cid){
       lh+='</span>';legEl.innerHTML+=lh;
     }
     lb.appendChild(legEl);
+    // Add phase1 legend section if applicable
+    if(Object.keys(phase1Tests).length>0){
+      var p1legEl=document.createElement('div');p1legEl.className='alloc-legend';
+      p1legEl.style.cssText='margin-top:2px;padding-top:2px;border-top:1px dashed #ccc;';
+      p1legEl.innerHTML='<span style="font-size:9px;color:#888780;margin-right:6px;">3/11–4/16:</span>';
+      var p1seen={};
+      for(var ptid in phase1Tests){
+        var ptdata=phase1Tests[ptid];
+        for(var p1li=0;p1li<ptdata.groups.length;p1li++){
+          var p1litem=ptdata.groups[p1li];
+          if(p1seen[p1litem.name])continue;p1seen[p1litem.name]=true;
+          var p1ctrl2=isCtrl(p1litem.name),p1shades2=AB_SHADES[ptdata.testId];
+          var p1gi2=phase1Tests[ptid].groups.indexOf(p1litem);
+          var p1fill2=p1ctrl2?COLORS.ctrl:(p1shades2?(p1shades2[p1gi2]||p1shades2[p1shades2.length-1]):(COLORS[ptdata.testId]||'#d3d1c7'));
+          var p1fl=forceLink(ptdata.testId,p1litem.name);
+          var p1lh='<span class="alloc-leg-item"><span class="alloc-leg-sw" style="background:'+p1fill2+'"></span>'+p1litem.name+' ('+swPct(domId,p1litem.pct)+'%)';
+          if(p1fl)p1lh+=' <a href="'+p1fl+'" target="_blank" style="color:#854f0b;text-decoration:none;font-size:11px;" title="Force: '+p1litem.name+'">&#9889;</a>';
+          p1lh+='</span>';p1legEl.innerHTML+=p1lh;
+        }
+      }
+      lb.appendChild(p1legEl);
+    }
 
     var layerNotes=[];
-    if(layer.id==='40569d1')layerNotes.push({t:'ACCELERATED: Dashboard ramp 10% \u2192 50% sitewide (hold 4 weeks), then ramp to default ~5/20 (90% sw with two 5% holdouts)'});
-    if(layer.id==='40569d1')layerNotes.push({t:'Dup of Layer 40569 — ensure control group includes AMA holdout, then re-seed to measure Dashboard performance (not combined AMA impact)'});
+    if(layer.id==='40569')layerNotes.push({t:'ACCELERATED: Dashboard ramp 40% sw treatment (hold 4 weeks), then ramp to default ~5/20 (90% sw with two 5% holdouts)'});
     if(layer.id==='NEW-CT-TEST')layerNotes.push({t:'Credit History tool loaded by proxy — Credit History Tool Test (Layer A) covers entire domain 124'});
     if(layer.id==='40569d2')layerNotes.push({t:'Same population as Layer 40569 — duplicate layer for independent Cash Flow Tab AO ramp'});
+    if(layer.id==='40734')layerNotes.push({t:'Layer partially re-seeded on 4/16 — Typing + Optimization vs Control continues'});
     if(layerNotes.length){
       var nn2=document.createElement('div');nn2.className='alloc-note';
       var nh2='';for(var nni=0;nni<layerNotes.length;nni++)
