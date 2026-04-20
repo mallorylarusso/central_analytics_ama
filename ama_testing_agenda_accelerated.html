@@ -146,6 +146,7 @@ a.lnk:hover{text-decoration:underline;}
   <span class="leg-item"><span class="leg-sw" style="background:#6dcaaa"></span>Chat Optimization</span>
   <span class="leg-item"><span style="font-size:11px;line-height:1">&#128204;</span>&nbsp;Txns to default 4/1</span>
   <span class="leg-item"><span style="display:inline-block;width:8px;height:8px;background:#c8860a;border-radius:2px;transform:rotate(45deg);"></span>&nbsp;Dashboard Typing to default ~5/20 (90% sw)</span>
+  <span class="leg-item"><span style="display:inline-block;width:8px;height:8px;background:#2a8a8a;border-radius:2px;transform:rotate(45deg);"></span>&nbsp;Credit History to default 5/6</span>
   <span class="leg-item"><span style="display:inline-block;width:8px;height:8px;background:#854f0b;border-radius:50%;"></span>&nbsp;Test Read</span>
   <span class="leg-item"><span class="leg-sw" style="background:#e24b4a;width:3px;border-radius:1px"></span>Today</span>
 </div>
@@ -188,6 +189,7 @@ var AO_RAMP = [
 ];
 var DASH_DEFAULT_DATE = '2026-05-20';
 var DASH_DEFAULT_PIN = new Date(2026,4,20);
+var CH_DEFAULT_PIN = new Date(2026,4,6);
 
 var FORCE_IDS = {
   71788:{'Control':234055,'pl_entrypoint':234056},
@@ -426,6 +428,15 @@ function buildTimeline(domId,cid){
         dpin.style.cssText='left:'+toPos(DASH_DEFAULT_PIN)+'%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;';
         dpin.innerHTML='<div style="width:8px;height:8px;background:#c8860a;border:1.5px solid #fff;border-radius:2px;transform:rotate(45deg);position:absolute;top:50%;left:50%;margin:-4px 0 0 -4px;"></div><span class="tl-tip-label">Dashboard Typing ramped to default ~5/20 (90% sw)</span>';
         track.appendChild(dpin);
+      }
+      // Credit History to default diamond on 5/6 — tests running on or after 5/6
+      var startDate=parseDate(t.start);
+      if(t.type!=='Long-Term Holdout'&&startDate<=CH_DEFAULT_PIN&&(!barEndForPin||barEndForPin>=CH_DEFAULT_PIN)){
+        var chpin=document.createElement('div');
+        chpin.className='tl-tip';
+        chpin.style.cssText='left:'+toPos(CH_DEFAULT_PIN)+'%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;';
+        chpin.innerHTML='<div style="width:8px;height:8px;background:#2a8a8a;border:1.5px solid #fff;border-radius:2px;transform:rotate(45deg);position:absolute;top:50%;left:50%;margin:-4px 0 0 -4px;"></div><span class="tl-tip-label">Credit History ramped to default 5/6</span>';
+        track.appendChild(chpin);
       }
       if(t.test_reads&&t.test_reads.length){
         for(var ri=0;ri<t.test_reads.length;ri++){
