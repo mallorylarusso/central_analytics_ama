@@ -282,7 +282,7 @@ var d123={id:123,label:'123 - Long-Term Analysis',layers:[
      tools:[],toolSubNote:null,
      notes:['ACCELERATED: 40% sw treatment (4/21) \u2192 hold 4 weeks \u2192 default (~5/20)','Typing variant selected as winner from Dashboard Prompt Bar Initial Test'],
      groups:[{name:'Typing Prompt Bar',pct:50},{name:'Dashboard Control',pct:37.5}],
-     test_reads:[{label:'Initial Read-Out',date:'2026-05-01',url:'#'}]},
+     test_reads:[{label:'Initial Read-Out (coming soon)',date:'2026-05-01',noLink:true}]},
   ]},
 ]};
 
@@ -429,12 +429,12 @@ function buildTimeline(domId,cid){
       if(t.test_reads&&t.test_reads.length){
         for(var ri=0;ri<t.test_reads.length;ri++){
           var tr=t.test_reads[ri];
-          var dot=document.createElement('a');
+          var dot=document.createElement(tr.noLink?'span':'a');
           dot.className='tl-read-dot';
           dot.style.left=toPos(tr.date)+'%';
           dot.title=tr.label+' ('+fmtDate(tr.date)+')';
-          dot.href=tr.url||'#';
-          dot.target='_blank';
+          if(!tr.noLink){dot.href=tr.url||'#';dot.target='_blank';}
+          else{dot.style.cursor='default';}
           track.appendChild(dot);
         }
       }
