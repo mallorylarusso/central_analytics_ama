@@ -286,7 +286,7 @@ var d123={id:123,label:'123 - Long-Term Analysis',layers:[
 
 var d124={id:124,label:'124 - Experimentation',layers:[
   {id:'40734',label:'Layer 40734',tests:[
-    {id:72086,name:'Dashboard Prompt Bar',type:'Multivariate A/B',start:'2026-03-11',end:'2026-05-20',ao:false,
+    {id:72086,name:'Dashboard Prompt Bar',type:'Multivariate A/B',start:'2026-03-11',end:'2026-05-20',ao:false,swOverride:'40% sw',
      goal:'Determine winning prompt bar variant; measure AMA impact on dashboard',
      kpi:'Sitewide metrics (dashboard only), surface retention, CTR, AMA chat performance (incl. retention)',
      tools:['txns_tool loaded'],toolSubNote:null,
@@ -383,7 +383,7 @@ function buildTimeline(domId,cid){
       var cur=curRampPhase(t);
       var isHoldout=t.type==='Long-Term Holdout';
       var futureRamp=getRamp(t);var futureMax=futureRamp.length?futureRamp[futureRamp.length-1]:null;
-      var swTxt=t.ao?(cur?cur.swPct+'% sw':(futureMax?futureMax.swPct+'% sw':'0% sw - not yet ramped')):(isHoldout?swPct(domId,totalPct)+'% sw':swPct(domId,ncPct)+'% sw');
+      var swTxt=t.swOverride?t.swOverride:t.ao?(cur?cur.swPct+'% sw':(futureMax?futureMax.swPct+'% sw':'0% sw - not yet ramped')):(isHoldout?swPct(domId,totalPct)+'% sw':swPct(domId,ncPct)+'% sw');
       var swColor=t.ao&&cur?'#3b6d11':t.ao?'#888780':'#1a1a18';
       var barColor=isDashAO(t.id)?'#fac775':t.ao?(cur?cur.fill:'#d4edc0'):(COLORS[t.id]||'#d3d1c7');
 
