@@ -418,8 +418,9 @@ function buildTimeline(domId,cid){
         pin.innerHTML='\uD83D\uDCCC<span class="tl-tip-label">Txns ramped to default 4/1</span>';
         track.appendChild(pin);
       }
-      // Dashboard Typing ramped to default diamond on 4/23 — all lines except holdouts
-      if(t.type!=='Long-Term Holdout'){
+      // Dashboard Typing ramped to default diamond on ~5/20 — all lines except holdouts and tests that end before then
+      var barEndForPin=t.barEnd?parseDate(t.barEnd):(t.end?parseDate(t.end):null);
+      if(t.type!=='Long-Term Holdout'&&(!barEndForPin||barEndForPin>=DASH_DEFAULT_PIN)){
         var dpin=document.createElement('div');
         dpin.className='tl-tip';
         dpin.style.cssText='left:'+toPos(DASH_DEFAULT_PIN)+'%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;';
