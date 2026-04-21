@@ -198,7 +198,8 @@ var FORCE_IDS = {
   72085:{'Cash Flow + Txns':234061},
   72086:{'Click':234063,'Click + Optimization':234065,'Control':234062,'Typing':234064,'Typing + Optimization':234066},
   73738:{'Control #2':239399},
-  720781:{'Dashboard Control':239789,'Typing Prompt Bar':239790}
+  720781:{'Dashboard Control':239789,'Typing Prompt Bar':239790},
+  88005:{'Credit History ON':239221}
 };
 
 function forceLink(testId,gname){
@@ -234,7 +235,7 @@ function parseDate(s){var p=s.split('-');return new Date(parseInt(p[0]),parseInt
 function fmtDate(s){if(!s)return'ongoing';var p=s.split('-');return parseInt(p[1])+'/'+parseInt(p[2])+'/'+p[0].slice(2);}
 function toPos(v){var d=(typeof v==='string')?parseDate(v):v;return Math.max(0,Math.min(100,(d-RS)/(RE-RS)*100));}
 function swPct(domId,p){return Math.round(p*(domId===123?0.80:0.20)*10)/10;}
-var DARWIN_IDS={72078:72078,72082:72082,72085:72085,71788:71788,72086:72086,73738:73738,720781:73860};
+var DARWIN_IDS={72078:72078,72082:72082,72085:72085,71788:71788,72086:72086,73738:73738,720781:73860,88005:73675};
 function darwinLink(id){if(DARWIN_IDS[id]!==undefined)return'https://evolve.admin.creditkarma.com/darwin/experiments/'+DARWIN_IDS[id]+'/overview';return null;}
 var CT_RAMP = [
   {label:'5%', swPct:5,  start:'2026-03-11',end:'2026-04-21',fill:'#d4edc0',text:'#27500a'},
