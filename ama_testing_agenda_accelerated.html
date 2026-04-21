@@ -137,7 +137,6 @@ a.lnk:hover{text-decoration:underline;}
 </div>
 
 <div class="legend">
-  <span class="leg-item"><span class="leg-sw" id="leg-ao-sw"></span><span id="leg-ao-lbl">Always On ramp</span></span>
   <span class="leg-item"><span class="leg-sw" style="background:#888780"></span>Long-Term Holdout</span>
   <span class="leg-item"><span class="leg-sw" style="background:#85b7eb"></span>Cash Flow</span>
   <span class="leg-item"><span class="leg-sw" style="background:#cecbf6"></span>Personal Loans</span>
@@ -305,7 +304,7 @@ var d124={id:124,label:'124 - Experimentation',layers:[
      ]}
   ]},
   {id:'NEW-CH-TEST',label:'New Layer A - AMA Credit History Tool',tests:[
-    {id:88005,name:'AMA Credit History Tool',type:'Data Collection',start:'2026-04-22',end:'2026-05-06',ao:false,
+    {id:88005,name:'AMA Credit History Tool',type:'Data Collection',start:'2026-04-24',end:'2026-05-06',ao:false,
      goal:'Ensure value of Credit History tool on Dashboard AMA',
      kpi:'Chat log review, positive feedback rate, prompts per session',
      tools:['credit_history_tool loaded'],toolSubNote:null,
@@ -634,7 +633,7 @@ function buildAlloc(domId,cid){
         } else {
           curSw=curPhaseForSw?curPhaseForSw.swPct+'%':'0%';
         }
-        legItems.push({name:g.name,fill:(isDashAO(t.id)&&!isCtrl(g.name))?'#fac775':(isDashAO(t.id)&&isCtrl(g.name))?'#e8e6de':(curRampPhase(t)?curRampPhase(t).fill:'#d4edc0'),sw:curSw,testId:t.id});
+        legItems.push({name:g.name,fill:(isDashAO(t.id)&&!isCtrl(g.name))?'#fac775':(isDashAO(t.id)&&isCtrl(g.name))?'#e8e6de':(COLORS[t.id]?COLORS[t.id]:(curRampPhase(t)?curRampPhase(t).fill:'#d4edc0')),sw:curSw,testId:t.id});
       } else if(useFixed&&FIXED_OFFSETS[layer.id]&&FIXED_OFFSETS[layer.id][g.name]){
         var fo=FIXED_OFFSETS[layer.id][g.name];
         var sp2=toPos(fo.dashStart||t.start),ep2=fo.dashEnd?toPos(fo.dashEnd):(t.end?toPos(t.end):100),wp2=Math.max(ep2-sp2,0.3);
@@ -768,10 +767,6 @@ buildTimeline(124,'tl-124');
 buildAlloc(123,'al-123');
 buildAlloc(124,'al-124');
 
-var curPhase=curRampPhase({ao:true,noRamp:false,start:'2026-03-11'});
-if(!curPhase)curPhase=AO_RAMP[0];
-document.getElementById('leg-ao-sw').style.background=curPhase.fill;
-document.getElementById('leg-ao-lbl').textContent='Always On ramp ('+curPhase.label+' sitewide)';
 
 function downloadHTML(){
   var blob=new Blob(['<!DOCTYPE html>\n'+document.documentElement.outerHTML],{type:'text/html'});
