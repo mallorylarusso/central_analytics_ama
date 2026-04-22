@@ -605,8 +605,8 @@ function buildAlloc(domId,cid){
             var totalLp4=vs4.lp+vs4.stackLp;
             var segH4=Math.min(vs4.lp/100*CHART_H,CHART_H),segTop4=CHART_H-Math.min(totalLp4/100*CHART_H,CHART_H);
             var seg=document.createElement('div');seg.className='alloc-vseg';
-            var seg4fill=(isDashAO(t.id)&&isCtrl(g.name))?'#e8e6de':vs4.ph.fill;
-            var seg4text=(isDashAO(t.id)&&isCtrl(g.name))?'#555':vs4.ph.text;
+            var seg4fill=(isDashAO(t.id)&&isCtrl(g.name))?'#e8e6de':(COLORS[t.id]&&!isDashAO(t.id))?COLORS[t.id]:vs4.ph.fill;
+            var seg4text=(isDashAO(t.id)&&isCtrl(g.name))?'#555':((COLORS[t.id]&&!isDashAO(t.id))?'#333':vs4.ph.text);
             var seg4z=(isDashAO(t.id)&&isCtrl(g.name))?'z-index:4;':'';
             seg.style.cssText='left:'+segSp+'%;width:'+segWp+'%;top:'+segTop4+'px;height:'+segH4+'px;background:'+seg4fill+';color:'+seg4text+';'+seg4z;
             seg.title=g.name+' - '+vs4.ph.swPct+'% sitewide';if(segWp>=2&&segH4>12)seg.textContent=vs4.ph.label;
